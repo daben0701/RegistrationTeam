@@ -29,29 +29,32 @@ import 'whatwg-fetch';
                 formData.append("mobile", values.userName);
                 formData.append("password", values.password);
 
-                fetch("http://123.56.253.83/api/account/login", {
+                fetch("http://123.56.253.83/account/login", {
                     method: "POST",
                     mode: "cors",
                     //credentials: "include",
                     headers: {
                         //'Accepts': 'application/json, text/plain, */*',
-                        //'Content-Type': '_application/x-www-form-urlencoded;charset=utf-8',
+                        'Content-Type': 'application/json;charset=utf-8',
                         //'Access-Control-Allow-Credentials': 'true',
                         //'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
                         //'Access-Control-Allow-Origin': 'http://123.56.253.83'
                     },
                     body: 
                     JSON.stringify({
-                        mobile: values.userName,
+                        usernameOrEmailAddress: values.userName,
                         password: values.password,
                     })
                 })
-                    .then((res) => {console.log(res)})
-                    .then((json) => {
-                        alert(json);
-                        hashHistory.push('/index/myform');
-                    }).catch((error) => {
-                        alert(error);
+                    .then((res) => {
+                        if(res.status >= 200 && res.status < 300){
+                            hashHistory.push('/index/myform');
+                        }else{
+                            message.error('账号或密码错误,请重新登录!')
+                        }
+                    })
+                    .catch((error) => {
+                        console.log(error);
                     })
             }
         });
