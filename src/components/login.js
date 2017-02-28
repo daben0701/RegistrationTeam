@@ -7,6 +7,8 @@ import { Link, hashHistory} from 'react-router';
 
 import styles from './login.css';
 
+import 'whatwg-fetch';
+
  class Login extends Component {
     constructor(props) {
         super(props);
@@ -17,12 +19,40 @@ import styles from './login.css';
         this.props.form.validateFields((err, values) => {
             if(!err){
                 console.log('Received values of form: ', values);
-                if(values.userName != 'admin' || values.password != "123456"){
-                    message.error('登录账号错误,请重新登录!');
-                    this.props.form.resetFields();
-                }else{
-                    hashHistory.push('/index/mytable');
-                }
+                //if(values.userName != 'admin' || values.password != "123456"){
+                    //message.error('登录账号错误,请重新登录!');
+                    //this.props.form.resetFields();
+                //}else{
+                   // hashHistory.push('/index/myform');
+                //}
+                let formData = new FormData();
+                formData.append("moblie", values.userName);
+                formData.append("password", values.password);
+
+                fetch("http://123.56.253.83/api/account/login", {
+                    method: "POST",
+                    mode: "cors",
+                    //credentials: "include",
+                    headers: {
+                        //'Accepts': 'application/json, text/plain, */*',
+                        //'Content-Type': '_application/x-www-form-urlencoded;charset=utf-8',
+                        //'Access-Control-Allow-Credentials': 'true',
+                        //'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
+                        //'Access-Control-Allow-Origin': 'http://123.56.253.83'
+                    },
+                    body: 
+                    JSON.stringify({
+                        moblie: values.userName,
+                        password: values.password,
+                    })
+                })
+                    .then((res) => {console.log(res)})
+                    .then((json) => {
+                        alert(json);
+                        hashHistory.push('/index/myform');
+                    }).catch((error) => {
+                        alert(error);
+                    })
             }
         });
     }
@@ -44,16 +74,11 @@ import styles from './login.css';
                         {getFieldDecorator('password', {
                             rules:[{required: true, message: "请输入密码！"}]
                         })(
-                            <Input addonBefore={<Icon type="lock" />} placeholder="密码" />
+                            <Input addonBefore={<Icon type="lock" />} type="password" placeholder="密码" />
                         )}
                     </FormItem>
                     <FormItem style={{width: 400}}>
-                        {getFieldDecorator('remember', {
-                            valuePropName: 'checked',
-                            initialValue: true,
-                        })(
-                            <Checkbox>记住我</Checkbox>
-                        )}
+                        
                         <a className="login-form-forget" style={{float: "right"}}>忘记密码</a>
                         <Button type="primary" htmlType="submit" className="login-form-button" style={{width: "100%"}}>登录</Button>
                     </FormItem>

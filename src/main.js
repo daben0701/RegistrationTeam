@@ -57,8 +57,8 @@ class Sider extends React.Component {
                         defaultSelectedKeys={[this.state.current]}
                         mode="inline">
                         <SubMenu key="sub1" title={<span><Icon type="mail"/><span>报名信息</span></span>}>
-                            <Menu.Item key="1"><Link to="/index/myTable">球员信息</Link></Menu.Item>
-                            <Menu.Item key="2"><Link to="/index/myForm">球队信息</Link></Menu.Item>
+                            <Menu.Item key="1"><Link to="/index/myTable">球队信息</Link></Menu.Item>
+                            <Menu.Item key="2"><Link to="/index/myForm">球员信息</Link></Menu.Item>
                         </SubMenu>
                     </Menu>
                 </div>
@@ -84,8 +84,8 @@ ReactDom.render(
                 <IndexRoute component={Login}/>
                 <Route path="login" component={Login} />
                 <Route path="index" component={Sider}>
-                    <Router path="myTable" component={myTable} />
                     <Route path="myForm" component={myForm} />
+                    <Router path="myTable" component={myTable} />
                     <Route path="myChart" component={myChart} />
                     <Route path="myCalendar" component={myCalendar} />
                     <Route path="myCard" component={myCard} />

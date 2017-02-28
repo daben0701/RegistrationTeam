@@ -33,63 +33,63 @@ const CollectionCreateForm = Form.create()(
       >
         <Form>
           <FormItem {...formItemLayout} label="姓名">
-            {getFieldDecorator('Name', {
+            {getFieldDecorator('name', {
               rules: [{ required: true, message: '请输入球员姓名!' }],
             })(
               <Input placeholder="球员姓名"/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="号码">
-            {getFieldDecorator('Number', {
+            {getFieldDecorator('number', {
               rules: [{ required: true, message: '请输入球员号码!' }],
             })(
               <InputNumber placeholder="球员号码" style={{width: "100%"}}/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="出生日期">
-            {getFieldDecorator('Birthday', {
+            {getFieldDecorator('birthDate', {
               rules: [{ required: true, message: '请输入球员出生日期!' }],
             })(
               <DatePicker placeholder="球员出生日期" style={{width: "100%"}}/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="身高(m)">
-            {getFieldDecorator('Height', {
+            {getFieldDecorator('height', {
               rules: [{ required: true, message: '请输入球员身高!' }],
             })(
               <InputNumber placeholder="球员身高" style={{width: "100%"}}/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="体重(kg)">
-            {getFieldDecorator('Weight', {
+            {getFieldDecorator('weight', {
               rules: [{ required: true, message: '请输入球员体重!' }],
             })(
               <InputNumber placeholder="球员体重" style={{width: "100%"}}/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="民族/国籍">
-            {getFieldDecorator('Nation', {
+            {getFieldDecorator('nation', {
               rules: [{ required: true, message: '请输入球员民族/国籍!' }],
             })(
               <Input placeholder="球员民族/国籍"/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="出生地">
-            {getFieldDecorator('BirthPlace', {
+            {getFieldDecorator('birthPlace', {
               rules: [{ required: true, message: '请输入球员出生地!' }],
             })(
               <Input placeholder="球员出生地"/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="身份证/其它证件号码">
-            {getFieldDecorator('IDCard', {
+            {getFieldDecorator('idNumber', {
               rules: [{ required: true, message: '请输入球员身份证/其它证件号码!' }],
             })(
               <InputNumber placeholder="球员身份证/其它证件号码" style={{width: "100%"}}/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="位置">
-            {getFieldDecorator('Position', {
+            {getFieldDecorator('roleNames', {
               rules: [{ required: true, message: '请输入球员位置!' }],
             })(
               <CheckboxGroup options={options} />
@@ -110,7 +110,7 @@ const EditInfoForm = Form.create()(
         { label: '得分后卫', value: '得分后卫' },
         { label: '组织后卫', value: '组织后卫' },
     ];
-    const { visible, onCancel, onCreate, data, form } = props;
+    const { visible, onCancel, onEdit, data, form } = props;
     const { getFieldDecorator } = form;
     const formItemLayout = {
       labelCol: { span: 7 },
@@ -123,70 +123,77 @@ const EditInfoForm = Form.create()(
         okText="确定"
         cancelText="取消"
         onCancel={onCancel}
-        onOk={onCreate}
+        onOk={onEdit}
       >
         <Form>
           <FormItem {...formItemLayout} label="姓名">
-            {getFieldDecorator('Name', {
+            {getFieldDecorator('name', {
               rules: [{ required: true, message: '请输入球员姓名!' }],
             })(
               <Input placeholder="球员姓名"/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="号码">
-            {getFieldDecorator('Number', {
+            {getFieldDecorator('number', {
               rules: [{ required: true, message: '请输入球员号码!' }],
             })(
               <InputNumber placeholder="球员号码" style={{width: "100%"}}/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="出生日期">
-            {getFieldDecorator('Birthday', {
+            {getFieldDecorator('birthDate', {
               rules: [{ required: true, message: '请输入球员出生日期!' }],
             })(
               <DatePicker placeholder="球员出生日期" style={{width: "100%"}}/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="身高(m)">
-            {getFieldDecorator('Height', {
+            {getFieldDecorator('height', {
               rules: [{ required: true, message: '请输入球员身高!' }],
             })(
               <InputNumber placeholder="球员身高" style={{width: "100%"}}/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="体重(kg)">
-            {getFieldDecorator('Weight', {
+            {getFieldDecorator('weight', {
               rules: [{ required: true, message: '请输入球员体重!' }],
             })(
               <InputNumber placeholder="球员体重" style={{width: "100%"}}/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="民族/国籍">
-            {getFieldDecorator('Nation', {
+            {getFieldDecorator('nation', {
               rules: [{ required: true, message: '请输入球员民族/国籍!' }],
             })(
               <Input placeholder="球员民族/国籍"/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="出生地">
-            {getFieldDecorator('BirthPlace', {
+            {getFieldDecorator('birthPlace', {
               rules: [{ required: true, message: '请输入球员出生地!' }],
             })(
               <Input placeholder="球员出生地"/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="身份证/其它证件号码">
-            {getFieldDecorator('IDCard', {
+            {getFieldDecorator('idNumber', {
               rules: [{ required: true, message: '请输入球员身份证/其它证件号码!' }],
             })(
               <InputNumber placeholder="球员身份证/其它证件号码" style={{width: "100%"}}/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="位置">
-            {getFieldDecorator('Position', {
+            {getFieldDecorator('roleNames', {
               rules: [{ required: true, message: '请输入球员位置!' }],
             })(
               <CheckboxGroup options={options} />
+            )}
+          </FormItem>
+          <FormItem {...formItemLayout}>
+            {getFieldDecorator('id', {
+              rules: [{ required: true }],
+            })(
+              <Input style={{display: "none"}}/>
             )}
           </FormItem>
         </Form>
@@ -211,8 +218,28 @@ const CollectionsPage = React.createClass({
       if (err) {
         return;
       }
-
+      
+      values.birthDate = values.birthDate.format();
+      values.roleNames = values.roleNames.join(",");
       console.log('Received values of form: ', values);
+      fetch("http://123.56.253.83");
+      const dataSource = this.state.tData;
+      const newData = {
+        key: this.state.tData.length + 1,
+        name: values.name,
+        number: values.number,
+        birthDate: values.birthDate,
+        height: values.height,
+        weight: values.weight,
+        roleNames: values.roleNames,
+        nation: values.nation,
+        birthPlace: values.birthPlace,
+        idNumber: values.idNumber
+      };
+      this.setState({
+        tData: [...dataSource, newData]
+      });
+
       form.resetFields();
       this.setState({ visible: false });
     });
@@ -241,51 +268,6 @@ const CollectionsPage = React.createClass({
   },
 });
 
-class EditPage extends Component{
-  constructor(props){
-      super(props);
-      this.state = {
-          visible: false,
-          data: this.props.data,
-      }
-  }
-  showModal = () => {
-    this.setState({ visible: true });
-    this.props.onClick(this.props.index);
-  }
-  handleCancel = () => {
-    this.setState({ visible: false });
-  }
-  handleCreate = () => {
-    const form = this.form;
-    form.validateFields((err, values) => {
-      if (err) {
-        return;
-      }
-
-      console.log('Received values of form: ', values);
-      form.resetFields();
-      this.setState({ visible: false });
-    });
-  }
-  saveFormRef = (form) => {
-    this.form = form;
-  }
-  render() {
-    return (
-        <div style={{ marginBottom: 16, display: "inline"}} className="btn-group">
-            <a onClick={() => this.showModal()}>编缉   </a>
-            <EditInfoForm
-                ref={this.saveFormRef}
-                visible={this.state.visible}
-                onCancel={this.handleCancel}
-                onCreate={this.handleCreate}
-                />
-        </div>
-    );
-  }
-}
-
 export default class myTable extends React.Component{
     constructor(props) {
         super(props);
@@ -303,14 +285,14 @@ export default class myTable extends React.Component{
                 key: i,
                 name: "daben0701",
                 number: 20,
-                birthday: '2015-06-01',
+                birthDate: '2015-06-01',
                 height: "196",
                 weight: "68",
-                position: "得分后卫,大前锋,小前锋,组织后卫,中锋",
+                roleNames: "得分后卫,大前锋,小前锋,组织后卫,中锋",
                 nation: "中国",
                 birthPlace: "北京",
-                idNo: "1234567890",
-                openration: "nothing"
+                idNumber: "1234567890",
+                id: i*2
             });
         }
         this.setState({
@@ -345,6 +327,39 @@ export default class myTable extends React.Component{
         this.setState({ visible: false });
     }
 
+    handleEdit= () => {
+    const form = this.form, index = this.state.index;
+    form.validateFields((err, values) => {
+      if (err) {
+        return;
+      }
+      
+      values.birthDate = values.birthDate.format();
+      values.roleNames = values.roleNames.join(",");
+      console.log('Received values of form: ', values);
+      fetch("http://123.56.253.83");
+      const dataSource = this.state.tData;
+
+      let date = values.birthDate.split("T")[0];
+      
+      dataSource[index].name = values.name;
+      dataSource[index].number = values.number;
+      dataSource[index].birthDate = date;
+      dataSource[index].height = values.height;
+      dataSource[index].weight = values.weight;
+      dataSource[index].nation = values.nation;
+      dataSource[index].birthPlace = values.birthPlace;
+      dataSource[index].idNumber = values.idNumber;
+      dataSource[index].roleNames = values.roleNames;
+
+      this.setState({
+        tData: [...dataSource]
+      });
+      //form.resetFields();
+      this.setState({ editFormVisible: false });
+    });
+  }
+
     confirm() {
         message.success('点击了确定');
     }
@@ -357,34 +372,37 @@ export default class myTable extends React.Component{
         this.form = form;
     }
 
-    showEditForm = (index) => {
+    showEditForm = (index, id) => {
         this.form.setFields({
-            Name: {
+            name: {
                 value: this.state.tData[index].name
             },
-            Number: {
+            number: {
                 value: this.state.tData[index].number
             },
-            Birthday: {
-                value: moment(this.state.tData[index].birthday, 'YYYY-MM-DD')
+            birthDate: {
+                value: moment(this.state.tData[index].birthDate, 'YYYY-MM-DD')
             },
-            Height: {
+            height: {
                 value: this.state.tData[index].height
             },
-            Weight: {
+            weight: {
                 value: this.state.tData[index].weight
             },
-            Position: {
-                value: this.state.tData[index].position
+            roleNames: {
+                value: this.state.tData[index].roleNames.split(",")
             },
-            Nation: {
+            nation: {
                 value: this.state.tData[index].nation
             },
-            BirthPlace: {
+            birthPlace: {
                 value: this.state.tData[index].birthPlace
             },
-            IDCard: {
-                value: this.state.tData[index].idNo
+            idNumber: {
+                value: this.state.tData[index].idNumber
+            },
+            id: {
+                value: this.state.tData[index].id
             }
         });
         this.setState({
@@ -397,6 +415,13 @@ export default class myTable extends React.Component{
         this.setState({
             editFormVisible: false
         });
+    }
+
+    onDelete = (index) => {
+        const dataSource = [...this.state.tData];
+        //fetch("http")
+        dataSource.splice(index, 1);
+        this.setState({dataSource});
     }
 
     render = () => {
@@ -413,8 +438,8 @@ export default class myTable extends React.Component{
             },
             {
                 title: '出生日期',
-                width: '7%',
-                dataIndex: 'birthday',
+                width: '8%',
+                dataIndex: 'birthDate',
             },
             {
                 title: '身高(m)',
@@ -438,21 +463,21 @@ export default class myTable extends React.Component{
             },
             {
                 title: '身份证号码/其它证件',
-                width: '15%',
-                dataIndex: 'idNo',
+                width: '12%',
+                dataIndex: 'idNumber',
             },
             {
                 title: '位置',
                 width: '22%',
-                dataIndex: 'position',
+                dataIndex: 'roleNames',
             },
             {
                 title: '操作',
-                dataIndex: 'operation',
+                dataIndex: 'id',
                 render:(text, record, index) => {
                     return (
                         <span>
-                            <a onClick={() => this.showEditForm(index)}>编缉  </a>
+                            <a onClick={() => this.showEditForm(index, text)}>编缉  </a>
                             <Popconfirm title="确定删除该球员信息?" onConfirm={() => this.onDelete(index)}>
                                 <a href="#">删除</a>
                             </Popconfirm>
@@ -489,7 +514,7 @@ export default class myTable extends React.Component{
                     visible={this.state.editFormVisible}
                     onCancel={this.closeForm}
                     data={this.state.tData[this.state.index]}
-                   // onCreate={this.handleCreate}
+                    onEdit={this.handleEdit}
                 />
                 <Table columns = {columns} dataSource = {this.state.tData} bordered pagination={pagination} />
             </div>
