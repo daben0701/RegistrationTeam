@@ -26,7 +26,7 @@ import 'whatwg-fetch';
                    // hashHistory.push('/index/myform');
                 //}
                 let formData = new FormData();
-                formData.append("moblie", values.userName);
+                formData.append("mobile", values.userName);
                 formData.append("password", values.password);
 
                 fetch("http://123.56.253.83/api/account/login", {
@@ -42,7 +42,7 @@ import 'whatwg-fetch';
                     },
                     body: 
                     JSON.stringify({
-                        moblie: values.userName,
+                        mobile: values.userName,
                         password: values.password,
                     })
                 })

@@ -421,7 +421,7 @@ export default class myTable extends React.Component{
         const dataSource = [...this.state.tData];
         //fetch("http")
         dataSource.splice(index, 1);
-        this.setState({dataSource});
+        this.setState({tData: dataSource});
     }
 
     render = () => {
