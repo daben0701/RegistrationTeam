@@ -32,7 +32,7 @@ import 'whatwg-fetch';
                 fetch("http://123.56.253.83/account/login", {
                     method: "POST",
                     mode: "cors",
-                    //credentials: "include",
+                    credentials: "include",
                     headers: {
                         //'Accepts': 'application/json, text/plain, */*',
                         'Content-Type': 'application/json;charset=utf-8',

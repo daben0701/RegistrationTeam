@@ -25,14 +25,35 @@ class myForm extends React.Component{
         return "";
     }
 
+    setFormValue = (data) => {
+        this.props.form.setFieldsValue({
+            fullName: data.fullName == null ?  '' : data.fullName,
+            name: data.name == null ? '' : data.name,
+            leader: data.leader == null ? '' : data.leader,
+            coach: data.coach == null ? '' : data.coach,
+            coachAssistant: data.coachAssistant == null ? '' : data.coachAssistant,
+            doctor: data.doctor == null ? '' : data.doctor,
+            translater : data.transfer == null ? '' : data.translater,
+            homeTeamShirtColor: data.homeTeamShirtColor == null ? '' : data.homeTeamShirtColor,
+            awayTeamShirtColor: data.awayTeamShirtColor == null ? '' : data.awayTeamShirtColor,
+        });
+    }
+
     componentWillMount = () => {
         fetch("http://123.56.253.83/api/Team/mine", {
             method: "GET",
             mode: "cors",
             credentials: "include",
         })
-            .then((res) => {})
-            .then((json) => {alert(json)})
+            .then((res) => {
+                if(res.status !== 200){
+                    hashHistory.push('/login');
+                }
+                res.json().then((data) => {
+                    //console.log(data);
+                    this.setFormValue(data);
+                })
+            })
             .catch((error) => {alert("error")})
     }
 
@@ -116,40 +137,35 @@ class myForm extends React.Component{
                 <FormItem
                     id='control-input'
                     label="助理教练"
-                    {...formItemLayout}
-                    required>
+                    {...formItemLayout}>
                     <Input id="control-input" placeholder = "请输入助理教练姓名" {...getFieldProps('coachAssistant')}/>
                 </FormItem>
 
                 <FormItem
                     id='control-input'
                     label="队医"
-                    {...formItemLayout}
-                    required>
+                    {...formItemLayout}>
                     <Input id="control-input" placeholder = "请输入队医姓名" {...getFieldProps('doctor')}/>
                 </FormItem>
 
                 <FormItem
                     id='control-input'
                     label="翻译"
-                    {...formItemLayout}
-                    required>
+                    {...formItemLayout}>
                     <Input id="control-input" placeholder = "请输入助理翻译姓名" {...getFieldProps('translater')}/>
                 </FormItem>
 
                 <FormItem
                     id='control-input'
                     label="主场球衣颜色"
-                    {...formItemLayout}
-                    required>
+                    {...formItemLayout}>
                     <Input id="control-input" placeholder = "请输入主场球衣颜色" {...getFieldProps('homeTeamShirtColor')}/>
                 </FormItem>
 
                 <FormItem
                     id='control-input'
                     label="客场球衣颜色"
-                    {...formItemLayout}
-                    required>
+                    {...formItemLayout}>
                     <Input id="control-input" placeholder = "请输入客场球衣颜色" {...getFieldProps('awayTeamShirtColor')}/>
                 </FormItem>
 
@@ -158,10 +174,6 @@ class myForm extends React.Component{
                     &nbsp; &nbsp; &nbsp;
                     <Button type="primary" htmlType="submit">确定</Button>
                 </FormItem>
-
-                <Modal title="登录" visible={this.state.visible} onOk={this.hideModal} onCancel={this.hideModal}>
-                    并没什么内容
-                </Modal>
             </Form>
         )
     }

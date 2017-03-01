@@ -222,7 +222,24 @@ const CollectionsPage = React.createClass({
       values.birthDate = values.birthDate.format();
       values.roleNames = values.roleNames.join(",");
       console.log('Received values of form: ', values);
-      fetch("http://123.56.253.83");
+      fetch("http://123.56.253.83/api/player", {
+          method: "POST",
+          mode: "cors",
+          credentials: "include",
+          headers: {
+              'Content-Type': 'application/json;charset=utf-8',
+          },
+          body: JSON.stringify(values)
+      })
+      .then((res) => {
+          if(res.status != 200){
+              hashHistory.push('/login');
+          }
+          message.success("创建球员信息成功");
+      })
+      .catch((error) => {
+          console.log(error);
+      })
       const dataSource = this.state.tData;
       const newData = {
         key: this.state.tData.length + 1,
@@ -278,25 +295,40 @@ export default class myTable extends React.Component{
     }
 
     componentDidMount = () => {
-        const data = [];
+        const players = [];
 
-        for(let i = 0; i < 30; i++){
-            data.push({
-                key: i,
-                name: "daben0701",
-                number: 20,
-                birthDate: '2015-06-01',
-                height: "196",
-                weight: "68",
-                roleNames: "得分后卫,大前锋,小前锋,组织后卫,中锋",
-                nation: "中国",
-                birthPlace: "北京",
-                idNumber: "1234567890",
-                id: i*2
-            });
-        }
+        fetch("http://123.56.253.83/api/player", {
+            method: "GET",
+            mode: "cors",
+            credentials: "include",
+        })
+        .then((res) => {
+            if(res.status !== 200){
+                hashHistory.push('/login');
+            }
+            res.json().then((data) => {
+                for(let i = 0; i < data.length; i++){
+                    players.push({
+                        key: i,
+                        name: data[i].name,
+                        number: data[i].number,
+                        birthDate: data[i].birthDate.split("T")[0],
+                        height: data[i].height,
+                        weight: data[i].weight,
+                        roleNames: data[i].roleNames,
+                        nation: data[i].nation,
+                        birthPlace: data[i].birthPlace,
+                        idNumber: data[i].idNumber,
+                        id: data[i].id,
+                    });
+                }
+                this.setState({
+                    tData: players
+                });
+            })
+        })
         this.setState({
-            tData: data,
+            tData: players,
             visible: false,
             editFormVisible: false,
             index: 0,
@@ -337,7 +369,24 @@ export default class myTable extends React.Component{
       values.birthDate = values.birthDate.format();
       values.roleNames = values.roleNames.join(",");
       console.log('Received values of form: ', values);
-      fetch("http://123.56.253.83");
+      fetch("http://123.56.253.83/api/player/" + values.id, {
+          method: "PUT",
+          mode: "cors",
+          credentials: "include",
+          headers: {
+              'Content-Type': 'application/json;charset=utf-8',
+          },
+          body: JSON.stringify(values)
+      })
+      .then((res) => {
+          if(res.status != 200){
+              hashHistory.push('/login');
+          }
+          message.success("编缉球员信息成功");
+      })
+      .catch((error) => {
+          console.log(error);
+      })
       const dataSource = this.state.tData;
 
       let date = values.birthDate.split("T")[0];
@@ -375,31 +424,31 @@ export default class myTable extends React.Component{
     showEditForm = (index, id) => {
         this.form.setFields({
             name: {
-                value: this.state.tData[index].name
+                value: this.state.tData[index].name == null ? '' : this.state.tData[index].name
             },
             number: {
-                value: this.state.tData[index].number
+                value: this.state.tData[index].number == null ? '' : this.state.tData[index].number
             },
             birthDate: {
-                value: moment(this.state.tData[index].birthDate, 'YYYY-MM-DD')
+                value: this.state.tData[index].birthDate == null ? '' : moment(this.state.tData[index].birthDate, 'YYYY-MM-DD')
             },
             height: {
-                value: this.state.tData[index].height
+                value: this.state.tData[index].height == null ? '' : this.state.tData[index].height
             },
             weight: {
-                value: this.state.tData[index].weight
+                value: this.state.tData[index].weight == null ? '' : this.state.tData[index].weight
             },
             roleNames: {
-                value: this.state.tData[index].roleNames.split(",")
+                value: this.state.tData[index].roleNames == null ? '' : this.state.tData[index].roleNames.split(",")
             },
             nation: {
-                value: this.state.tData[index].nation
+                value: this.state.tData[index].nation == null ? '' : this.state.tData[index].nation
             },
             birthPlace: {
-                value: this.state.tData[index].birthPlace
+                value: this.state.tData[index].birthPlace == null ? '' : this.state.tData[index].birthPlace
             },
             idNumber: {
-                value: this.state.tData[index].idNumber
+                value: this.state.tData[index].idNumber == null ? '' : this.state.tData[index].idNumber
             },
             id: {
                 value: this.state.tData[index].id
