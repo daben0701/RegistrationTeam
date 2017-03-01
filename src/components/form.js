@@ -1,6 +1,7 @@
 import React from 'react'
 import 'whatwg-fetch'
 import {Form, Input, Select, Checkbox, DatePicker, Col, Radio, Button, Modal, message} from 'antd'
+import { Link, hashHistory} from 'react-router';
 
 const FormItem = Form.Item
 const Option = Select.Option
@@ -33,7 +34,7 @@ class myForm extends React.Component{
             coach: data.coach == null ? '' : data.coach,
             coachAssistant: data.coachAssistant == null ? '' : data.coachAssistant,
             doctor: data.doctor == null ? '' : data.doctor,
-            translater : data.transfer == null ? '' : data.translater,
+            translater : data.translater == null ? '' : data.translater,
             homeTeamShirtColor: data.homeTeamShirtColor == null ? '' : data.homeTeamShirtColor,
             awayTeamShirtColor: data.awayTeamShirtColor == null ? '' : data.awayTeamShirtColor,
             id: data.id == null ? '' : data.id,
@@ -79,15 +80,17 @@ class myForm extends React.Component{
             },
             body: content
         }).then((res) => {
-            if(res.status != 200){
-
+            if(res.status >= 200 && res.status < 300){
+                message.success("球队信息更新成功！");
+            }else{
+                hashHistory.push('/login');
             }
         })
         .catch((error) => {alert(error);});
     }
 
-    showModal = () => {
-        this.setState({visible: true});
+    resetModal = () => {
+        this.props.form.resetFields();
     }
 
     hideModal = () => {
@@ -167,13 +170,12 @@ class myForm extends React.Component{
                 </FormItem>
 
                 <FormItem
-                    label="客场球衣颜色"
                     {...formItemLayout}>
                     <Input style = {{display: "none"}} {...getFieldProps('id')}/>
                 </FormItem>
 
                 <FormItem wrapperCol={{span: 8, offset: 10}} style={{marginTop: 24}}>
-                    <Button type="ghost" onClick={this.showModal}>取消</Button>
+                    <Button type="ghost" onClick={this.resetModal}>重置</Button>
                     &nbsp; &nbsp; &nbsp;
                     <Button type="primary" htmlType="submit">确定</Button>
                 </FormItem>

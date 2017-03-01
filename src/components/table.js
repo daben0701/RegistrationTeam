@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import moment from 'moment'
 import {Table, Icon, Button, Popconfirm, Form, Input, InputNumber, Select, Checkbox, DatePicker, Col, Radio, Modal, message} from 'antd'
+import { Link, hashHistory} from 'react-router';
 import myForm from './form.js'
 
 const FormItem = Form.Item;
