@@ -7,9 +7,9 @@ const FormItem = Form.Item;
 const Option = Select.Option;
 const CheckboxGroup = Checkbox.Group;
 
-const CollectionCreateForm = Form.create()(
+const CreateForm = Form.create()(
   (props) => {
-    const { visible, onCancel, onCreate, form } = props;
+    const { createVisible, onCreateFormCancel, onCreate, form } = props;
     const { getFieldDecorator } = form;
     const formItemLayout = {
       labelCol: { span: 7 },
@@ -24,11 +24,11 @@ const CollectionCreateForm = Form.create()(
     ];
     return (
       <Modal
-        visible={visible}
+        visible={createVisible}
         title="新建球员信息"
         okText="确定"
         cancelText="取消"
-        onCancel={onCancel}
+        onCancel={onCreateFormCancel}
         onOk={onCreate}
       >
         <Form>
@@ -202,17 +202,21 @@ const EditInfoForm = Form.create()(
   }
 );
 
-const CollectionsPage = React.createClass({
-  getInitialState() {
-    return { visible: false };
-  },
+class CollectionsPage extends React.Component{
+  constructor(props) {
+      super(props);
+      this.state = {
+          visible: false,
+          data: props.data,
+      };
+  }
   showModal() {
     this.setState({ visible: true });
-  },
+  }
   handleCancel() {
     this.setState({ visible: false });
-  },
-  handleCreate() {
+  }
+  handleCreate = () => {
     const form = this.form;
     form.validateFields((err, values) => {
       if (err) {
@@ -225,9 +229,10 @@ const CollectionsPage = React.createClass({
       fetch("http://123.56.253.83/api/player", {
           method: "POST",
           mode: "cors",
-          credentials: "include",
+          //credentials: "include",
           headers: {
               'Content-Type': 'application/json;charset=utf-8',
+              'Authorization': 'bearer ' + document.cookie,
           },
           body: JSON.stringify(values)
       })
@@ -240,9 +245,9 @@ const CollectionsPage = React.createClass({
       .catch((error) => {
           console.log(error);
       })
-      const dataSource = this.state.tData;
+      const dataSource = this.state.data;
       const newData = {
-        key: this.state.tData.length + 1,
+        key: this.state.data.length + 1,
         name: values.name,
         number: values.number,
         birthDate: values.birthDate,
@@ -254,16 +259,18 @@ const CollectionsPage = React.createClass({
         idNumber: values.idNumber
       };
       this.setState({
-        tData: [...dataSource, newData]
+        data: [...dataSource, newData]
       });
 
       form.resetFields();
       this.setState({ visible: false });
     });
-  },
-  saveFormRef(form) {
+  }
+
+  saveFormRef = (form) => {
     this.form = form;
-  },
+  }
+
   render() {
     return (
         <div style={{ marginBottom: 16 }} className="btn-group">
@@ -282,8 +289,8 @@ const CollectionsPage = React.createClass({
 
         </div>
     );
-  },
-});
+  }
+}
 
 export default class myTable extends React.Component{
     constructor(props) {
@@ -291,6 +298,7 @@ export default class myTable extends React.Component{
         this.state = {
             tData: [],
             selectedRowKeys: [],
+            createVisible: false,
         };
     }
 
@@ -300,7 +308,10 @@ export default class myTable extends React.Component{
         fetch("http://123.56.253.83/api/player", {
             method: "GET",
             mode: "cors",
-            credentials: "include",
+            //credentials: "include",
+            headers: {
+                'Authorization': 'bearer ' + document.cookie,
+            }
         })
         .then((res) => {
             if(res.status !== 200){
@@ -331,6 +342,7 @@ export default class myTable extends React.Component{
             tData: players,
             visible: false,
             editFormVisible: false,
+            createVisible: false,
             index: 0,
         });
     }
@@ -340,9 +352,9 @@ export default class myTable extends React.Component{
         this.setState({selectedRowKeys});
     }
 
-    showModal() {
+    showModal = () => {
         this.setState({
-            visible: true
+            createVisible: true
         });
     }
 
@@ -360,53 +372,54 @@ export default class myTable extends React.Component{
     }
 
     handleEdit= () => {
-    const form = this.form, index = this.state.index;
-    form.validateFields((err, values) => {
-      if (err) {
-        return;
-      }
-      
-      values.birthDate = values.birthDate.format();
-      values.roleNames = values.roleNames.join(",");
-      console.log('Received values of form: ', values);
-      fetch("http://123.56.253.83/api/player/" + values.id, {
-          method: "PUT",
-          mode: "cors",
-          credentials: "include",
-          headers: {
-              'Content-Type': 'application/json;charset=utf-8',
-          },
-          body: JSON.stringify(values)
-      })
-      .then((res) => {
-          if(res.status != 200){
-              hashHistory.push('/login');
-          }
-          message.success("编缉球员信息成功");
-      })
-      .catch((error) => {
-          console.log(error);
-      })
-      const dataSource = this.state.tData;
+        const form = this.form, index = this.state.index;
+        form.validateFields((err, values) => {
+        if (err) {
+            return;
+        }
+        
+        values.birthDate = values.birthDate.format();
+        values.roleNames = values.roleNames.join(",");
+        console.log('Received values of form: ', values);
+        fetch("http://123.56.253.83/api/player/" + values.id, {
+            method: "PUT",
+            mode: "cors",
+            //credentials: "include",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+                'Authorization': 'bearer ' + document.cookie,
+            },
+            body: JSON.stringify(values)
+        })
+        .then((res) => {
+            if(res.status != 200){
+                hashHistory.push('/login');
+            }
+            message.success("编缉球员信息成功");
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+        const dataSource = this.state.tData;
 
-      let date = values.birthDate.split("T")[0];
-      
-      dataSource[index].name = values.name;
-      dataSource[index].number = values.number;
-      dataSource[index].birthDate = date;
-      dataSource[index].height = values.height;
-      dataSource[index].weight = values.weight;
-      dataSource[index].nation = values.nation;
-      dataSource[index].birthPlace = values.birthPlace;
-      dataSource[index].idNumber = values.idNumber;
-      dataSource[index].roleNames = values.roleNames;
+        let date = values.birthDate.split("T")[0];
+        
+        dataSource[index].name = values.name;
+        dataSource[index].number = values.number;
+        dataSource[index].birthDate = date;
+        dataSource[index].height = values.height;
+        dataSource[index].weight = values.weight;
+        dataSource[index].nation = values.nation;
+        dataSource[index].birthPlace = values.birthPlace;
+        dataSource[index].idNumber = values.idNumber;
+        dataSource[index].roleNames = values.roleNames;
 
-      this.setState({
-        tData: [...dataSource]
+        this.setState({
+          tData: [...dataSource]
+        });
+        //form.resetFields();
+        this.setState({ editFormVisible: false });
       });
-      //form.resetFields();
-      this.setState({ editFormVisible: false });
-    });
   }
 
     confirm() {
@@ -460,10 +473,75 @@ export default class myTable extends React.Component{
         });
     }
 
+    handleCancel() {
+        this.setState({ visible: false });
+    }
+
+    handleCreate = () => {
+      const form = this.createForm;
+      form.validateFields((err, values) => {
+        if (err) {
+          return;
+        }
+        
+        values.birthDate = values.birthDate.format();
+        values.roleNames = values.roleNames.join(",");
+        console.log('Received values of form: ', values);
+        fetch("http://123.56.253.83/api/player", {
+            method: "POST",
+            mode: "cors",
+            //credentials: "include",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+                'Authorization': 'bearer ' + document.cookie,
+            },
+            body: JSON.stringify(values)
+        })
+        .then((res) => {
+            if(res.status != 200){
+                hashHistory.push('/login');
+            }
+            message.success("创建球员信息成功");
+            const dataSource = this.state.tData;
+            const newData = {
+                key: this.state.tData.length + 1,
+                name: values.name,
+                number: values.number,
+                birthDate: values.birthDate,
+                height: values.height,
+                weight: values.weight,
+                roleNames: values.roleNames,
+                nation: values.nation,
+                birthPlace: values.birthPlace,
+                idNumber: values.idNumber
+            };
+            this.setState({
+              tData: [...dataSource, newData]
+            });
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+
+        form.resetFields();
+        this.setState({ createVisible: false });
+      });
+    }
+
+    saveCreateFormRef = (form) => {
+      this.createForm = form;
+    }
+
     closeForm = () => {
         this.setState({
             editFormVisible: false
         });
+    }
+
+    closeCreateForm = () => {
+        this.setState({
+            createVisible: false
+        })
     }
 
     onDelete = (index) => {
@@ -557,7 +635,19 @@ export default class myTable extends React.Component{
 
         return (
             <div>
-                <CollectionsPage />
+                <div style={{ marginBottom: 16 }} className="btn-group">
+                  <span>
+                      <Button type="primary" onClick={this.showModal.bind(this)}>
+                          <Icon type="plus" /> 添加球员信息
+                      </Button>
+                  </span>
+                </div>
+                <CreateForm
+                    ref={this.saveCreateFormRef}
+                    createVisible={this.state.createVisible}
+                    onCreateFormCancel={this.closeCreateForm}
+                    onCreate={this.handleCreate}
+                />
                 <EditInfoForm
                     ref={this.saveFormRef}
                     visible={this.state.editFormVisible}

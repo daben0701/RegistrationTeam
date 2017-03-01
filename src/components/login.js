@@ -29,10 +29,10 @@ import 'whatwg-fetch';
                 formData.append("mobile", values.userName);
                 formData.append("password", values.password);
 
-                fetch("http://123.56.253.83/account/login", {
+                fetch("http://123.56.253.83/api/account/login", {
                     method: "POST",
                     mode: "cors",
-                    credentials: "include",
+                    //credentials: "include",
                     headers: {
                         //'Accepts': 'application/json, text/plain, */*',
                         'Content-Type': 'application/json;charset=utf-8',
@@ -42,13 +42,16 @@ import 'whatwg-fetch';
                     },
                     body: 
                     JSON.stringify({
-                        usernameOrEmailAddress: values.userName,
+                        mobile: values.userName,
                         password: values.password,
                     })
                 })
                     .then((res) => {
                         if(res.status >= 200 && res.status < 300){
-                            hashHistory.push('/index/myform');
+                            res.json().then((data) => {
+                                document.cookie = data.result;
+                                hashHistory.push('/index/myform');  
+                            })
                         }else{
                             message.error('账号或密码错误,请重新登录!')
                         }
@@ -64,28 +67,33 @@ import 'whatwg-fetch';
         const { getFieldDecorator  } = this.props.form;
 
         return(
-            <div style={{width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center"}}>
-                <Form onSubmit={this.submitLogin} className="login-form" style={{maxWidth: 400}}>
-                    <FormItem>
-                        {getFieldDecorator('userName', {
-                            rules:[{required: true, message: "请输入用户名！"}],
-                        })(
-                            <Input addonBefore={<Icon type="user" />} placeholder="用户名" />
-                        )}
-                    </FormItem>
-                    <FormItem>
-                        {getFieldDecorator('password', {
-                            rules:[{required: true, message: "请输入密码！"}]
-                        })(
-                            <Input addonBefore={<Icon type="lock" />} type="password" placeholder="密码" />
-                        )}
-                    </FormItem>
-                    <FormItem style={{width: 400}}>
-                        
-                        <a className="login-form-forget" style={{float: "right"}}>忘记密码</a>
-                        <Button type="primary" htmlType="submit" className="login-form-button" style={{width: "100%"}}>登录</Button>
-                    </FormItem>
-                </Form>
+            <div style={{width: "100%", height: "100%"}}>
+                <div style={{position: "absolute", left: 10, top: 10}}>
+                    <span style={{fontSize: 40, lineHeight: 3, marginLeft: 20, color: "#108ee9"}}>篮球联赛报名系统</span>
+                </div>
+                <div style={{width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center"}}>
+                    <Form onSubmit={this.submitLogin} className="login-form" style={{maxWidth: 400}}>
+                        <FormItem>
+                            {getFieldDecorator('userName', {
+                                rules:[{required: true, message: "请输入用户名！"}],
+                            })(
+                                <Input addonBefore={<Icon type="user" />} placeholder="用户名" />
+                            )}
+                        </FormItem>
+                        <FormItem>
+                            {getFieldDecorator('password', {
+                                rules:[{required: true, message: "请输入密码！"}]
+                            })(
+                                <Input addonBefore={<Icon type="lock" />} type="password" placeholder="密码" />
+                            )}
+                        </FormItem>
+                        <FormItem style={{width: 400}}>
+                            
+                            <a className="login-form-forget" style={{float: "right"}}>忘记密码</a>
+                            <Button type="primary" htmlType="submit" className="login-form-button" style={{width: "100%"}}>登录</Button>
+                        </FormItem>
+                    </Form>
+                </div>
             </div>
         );
     }

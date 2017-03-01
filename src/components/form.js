@@ -36,6 +36,7 @@ class myForm extends React.Component{
             translater : data.transfer == null ? '' : data.translater,
             homeTeamShirtColor: data.homeTeamShirtColor == null ? '' : data.homeTeamShirtColor,
             awayTeamShirtColor: data.awayTeamShirtColor == null ? '' : data.awayTeamShirtColor,
+            id: data.id == null ? '' : data.id,
         });
     }
 
@@ -43,7 +44,10 @@ class myForm extends React.Component{
         fetch("http://123.56.253.83/api/Team/mine", {
             method: "GET",
             mode: "cors",
-            credentials: "include",
+            headers: {
+                'Authorization': 'bearer ' + document.cookie,
+            }
+            //credentials: "include",
         })
             .then((res) => {
                 if(res.status !== 200){
@@ -65,19 +69,21 @@ class myForm extends React.Component{
         e.preventDefault();
         console.log("收到表单值： ", JSON.stringify(this.props.form.getFieldsValue()));
         let content = JSON.stringify(this.props.form.getFieldsValue());
-        fetch("http://123.56.253.83/api/team", {
+        fetch("http://123.56.253.83/api/team/mine", {
             method: "PUT",
             mode: "cors",
-            credentials: "include",
+            //credentials: "include",
             headers: {
                 'Content-Type': 'application/json;charset=utf-8',
+                'Authorization': 'bearer ' + document.cookie,
             },
             body: content
-        }).then((res) => {alert(res)})
-        .then((json) => {alert(json)})
+        }).then((res) => {
+            if(res.status != 200){
+
+            }
+        })
         .catch((error) => {alert(error);});
-        
-        this.props.form.resetFields();
     }
 
     showModal = () => {
@@ -103,70 +109,67 @@ class myForm extends React.Component{
         return (
             <Form horizontal onSubmit = {this.handleSubmit}>
                 <FormItem
-                    id='control-input'
                     label="俱乐部球队全称"
                     {...formItemLayout}
                     required>
-                    <Input id="control-input" placeholder = "请输入俱乐部球队全称" {...getFieldProps('fullName')}/>
+                    <Input placeholder = "请输入俱乐部球队全称" {...getFieldProps('fullName')}/>
                 </FormItem>
 
                 <FormItem
-                    id='control-input'
                     label="俱乐部球队简称"
                     {...formItemLayout}
                     required>
-                    <Input id="control-input" placeholder = "请输入俱乐部球队简称" {...getFieldProps('name')}/>
+                    <Input placeholder = "请输入俱乐部球队简称" {...getFieldProps('name')}/>
                 </FormItem>
 
                 <FormItem
-                    id='control-input'
                     label="领队"
                     {...formItemLayout}
                     required>
-                    <Input id="control-input" placeholder = "请输入领队姓名" {...getFieldProps('leader')}/>
+                    <Input placeholder = "请输入领队姓名" {...getFieldProps('leader')}/>
                 </FormItem>
 
                 <FormItem
-                    id='control-input'
                     label="教练员"
                     {...formItemLayout}
                     required>
-                    <Input id="control-input" placeholder = "请输入教练员姓名" {...getFieldProps('coach')}/>
+                    <Input placeholder = "请输入教练员姓名" {...getFieldProps('coach')}/>
                 </FormItem>
 
                 <FormItem
-                    id='control-input'
                     label="助理教练"
                     {...formItemLayout}>
-                    <Input id="control-input" placeholder = "请输入助理教练姓名" {...getFieldProps('coachAssistant')}/>
+                    <Input placeholder = "请输入助理教练姓名" {...getFieldProps('coachAssistant')}/>
                 </FormItem>
 
                 <FormItem
-                    id='control-input'
                     label="队医"
                     {...formItemLayout}>
-                    <Input id="control-input" placeholder = "请输入队医姓名" {...getFieldProps('doctor')}/>
+                    <Input placeholder = "请输入队医姓名" {...getFieldProps('doctor')}/>
                 </FormItem>
 
                 <FormItem
-                    id='control-input'
                     label="翻译"
                     {...formItemLayout}>
-                    <Input id="control-input" placeholder = "请输入助理翻译姓名" {...getFieldProps('translater')}/>
+                    <Input placeholder = "请输入助理翻译姓名" {...getFieldProps('translater')}/>
                 </FormItem>
 
                 <FormItem
-                    id='control-input'
                     label="主场球衣颜色"
                     {...formItemLayout}>
-                    <Input id="control-input" placeholder = "请输入主场球衣颜色" {...getFieldProps('homeTeamShirtColor')}/>
+                    <Input placeholder = "请输入主场球衣颜色" {...getFieldProps('homeTeamShirtColor')}/>
                 </FormItem>
 
                 <FormItem
-                    id='control-input'
                     label="客场球衣颜色"
                     {...formItemLayout}>
-                    <Input id="control-input" placeholder = "请输入客场球衣颜色" {...getFieldProps('awayTeamShirtColor')}/>
+                    <Input placeholder = "请输入客场球衣颜色" {...getFieldProps('awayTeamShirtColor')}/>
+                </FormItem>
+
+                <FormItem
+                    label="客场球衣颜色"
+                    {...formItemLayout}>
+                    <Input style = {{display: "none"}} {...getFieldProps('id')}/>
                 </FormItem>
 
                 <FormItem wrapperCol={{span: 8, offset: 10}} style={{marginTop: 24}}>
