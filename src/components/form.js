@@ -25,12 +25,16 @@ class myForm extends React.Component{
         return "";
     }
 
-   // componentWillMount = () => {
-    //    fetch("http://123.56.253.83/api/Team/mine"
-     //       .then((res) => {})
-     //       .then((json) => {alert(json)})
-        ///    .catch((error) => {alert("error")}))
-    //}
+    componentWillMount = () => {
+        fetch("http://123.56.253.83/api/Team/mine", {
+            method: "GET",
+            mode: "cors",
+            credentials: "include",
+        })
+            .then((res) => {})
+            .then((json) => {alert(json)})
+            .catch((error) => {alert("error")})
+    }
 
     handleSelectChange = (value) => {
         console.log('selected ${value}');
@@ -43,6 +47,10 @@ class myForm extends React.Component{
         fetch("http://123.56.253.83/api/team", {
             method: "PUT",
             mode: "cors",
+            credentials: "include",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+            },
             body: content
         }).then((res) => {alert(res)})
         .then((json) => {alert(json)})
