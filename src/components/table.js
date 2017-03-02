@@ -76,7 +76,7 @@ const CreateForm = Form.create()(
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="出生地">
-            {getFieldDecorator('birthPlace', {
+            {getFieldDecorator('birthplace', {
               rules: [{ required: true, message: '请输入球员出生地!' }],
             })(
               <Input placeholder="球员出生地"/>
@@ -86,7 +86,7 @@ const CreateForm = Form.create()(
             {getFieldDecorator('idNumber', {
               rules: [{ required: true, message: '请输入球员身份证/其它证件号码!' }],
             })(
-              <InputNumber placeholder="球员身份证/其它证件号码" style={{width: "100%"}}/>
+              <Input placeholder="球员身份证/其它证件号码"/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="位置">
@@ -170,7 +170,7 @@ const EditInfoForm = Form.create()(
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="出生地">
-            {getFieldDecorator('birthPlace', {
+            {getFieldDecorator('birthplace', {
               rules: [{ required: true, message: '请输入球员出生地!' }],
             })(
               <Input placeholder="球员出生地"/>
@@ -180,7 +180,7 @@ const EditInfoForm = Form.create()(
             {getFieldDecorator('idNumber', {
               rules: [{ required: true, message: '请输入球员身份证/其它证件号码!' }],
             })(
-              <InputNumber placeholder="球员身份证/其它证件号码" style={{width: "100%"}}/>
+              <Input placeholder="球员身份证/其它证件号码"/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="位置">
@@ -203,96 +203,6 @@ const EditInfoForm = Form.create()(
   }
 );
 
-class CollectionsPage extends React.Component{
-  constructor(props) {
-      super(props);
-      this.state = {
-          visible: false,
-          data: props.data,
-      };
-  }
-  showModal() {
-    this.setState({ visible: true });
-  }
-  handleCancel() {
-    this.setState({ visible: false });
-  }
-  handleCreate = () => {
-    const form = this.form;
-    form.validateFields((err, values) => {
-      if (err) {
-        return;
-      }
-      
-      values.birthDate = values.birthDate.format();
-      values.roleNames = values.roleNames.join(",");
-      console.log('Received values of form: ', values);
-      fetch("http://123.56.253.83/api/player", {
-          method: "POST",
-          mode: "cors",
-          //credentials: "include",
-          headers: {
-              'Content-Type': 'application/json;charset=utf-8',
-              'Authorization': 'bearer ' + document.cookie,
-          },
-          body: JSON.stringify(values)
-      })
-      .then((res) => {
-          if(res.status != 200){
-              hashHistory.push('/login');
-          }
-          message.success("创建球员信息成功");
-      })
-      .catch((error) => {
-          console.log(error);
-      })
-      const dataSource = this.state.data;
-      const newData = {
-        key: this.state.data.length + 1,
-        name: values.name,
-        number: values.number,
-        birthDate: values.birthDate,
-        height: values.height,
-        weight: values.weight,
-        roleNames: values.roleNames,
-        nation: values.nation,
-        birthPlace: values.birthPlace,
-        idNumber: values.idNumber
-      };
-      this.setState({
-        data: [...dataSource, newData]
-      });
-
-      form.resetFields();
-      this.setState({ visible: false });
-    });
-  }
-
-  saveFormRef = (form) => {
-    this.form = form;
-  }
-
-  render() {
-    return (
-        <div style={{ marginBottom: 16 }} className="btn-group">
-            <span>
-                <Button type="primary" onClick={this.showModal.bind(this)}>
-                    <Icon type="plus" /> 添加球员信息
-                </Button>
-            </span>
-            <CollectionCreateForm
-                ref={this.saveFormRef}
-                visible={this.state.visible}
-                onCancel={this.handleCancel}
-                onCreate={this.handleCreate}
-                />
-
-
-        </div>
-    );
-  }
-}
-
 export default class myTable extends React.Component{
     constructor(props) {
         super(props);
@@ -301,6 +211,26 @@ export default class myTable extends React.Component{
             selectedRowKeys: [],
             createVisible: false,
         };
+    }
+
+    componentWillMount = () => {
+        fetch("http://123.56.253.83/api/Team/mine", {
+            method: "GET",
+            mode: "cors",
+            headers: {
+                'Authorization': 'bearer ' + document.cookie,
+            }
+            //credentials: "include",
+        })
+            .then((res) => {
+                if(res.status !== 200){
+                    hashHistory.push('/login');
+                }
+                res.json().then((data) => {
+                    document.teamId = data.id;
+                })
+            })
+            .catch((error) => {alert("error")})
     }
 
     componentDidMount = () => {
@@ -329,7 +259,7 @@ export default class myTable extends React.Component{
                         weight: data[i].weight,
                         roleNames: data[i].roleNames,
                         nation: data[i].nation,
-                        birthPlace: data[i].birthPlace,
+                        birthplace: data[i].birthplace,
                         idNumber: data[i].idNumber,
                         id: data[i].id,
                     });
@@ -381,8 +311,9 @@ export default class myTable extends React.Component{
         
         values.birthDate = values.birthDate.format();
         values.roleNames = values.roleNames.join(",");
+        values.teamId = document.teamId;
         console.log('Received values of form: ', values);
-        fetch("http://123.56.253.83/api/player/" + values.id, {
+        fetch("http://123.56.253.83/api/player/myplayer", {
             method: "PUT",
             mode: "cors",
             //credentials: "include",
@@ -395,8 +326,9 @@ export default class myTable extends React.Component{
         .then((res) => {
             if(res.status != 200){
                 hashHistory.push('/login');
+            }else{
+                message.success("编缉球员信息成功");
             }
-            message.success("编缉球员信息成功");
         })
         .catch((error) => {
             console.log(error);
@@ -411,7 +343,7 @@ export default class myTable extends React.Component{
         dataSource[index].height = values.height;
         dataSource[index].weight = values.weight;
         dataSource[index].nation = values.nation;
-        dataSource[index].birthPlace = values.birthPlace;
+        dataSource[index].birthplace = values.birthplace;
         dataSource[index].idNumber = values.idNumber;
         dataSource[index].roleNames = values.roleNames;
 
@@ -436,36 +368,42 @@ export default class myTable extends React.Component{
     }
 
     showEditForm = (index, id) => {
+        let i;
+        for(i = 0; i < this.state.tData.length; i++){
+            if(this.state.tData[i].id == id){
+                break;
+            }
+        }
         this.form.setFields({
             name: {
-                value: this.state.tData[index].name == null ? '' : this.state.tData[index].name
+                value: this.state.tData[i].name == null ? '' : this.state.tData[i].name
             },
             number: {
-                value: this.state.tData[index].number == null ? '' : this.state.tData[index].number
+                value: this.state.tData[i].number == null ? '' : this.state.tData[i].number
             },
             birthDate: {
-                value: this.state.tData[index].birthDate == null ? '' : moment(this.state.tData[index].birthDate, 'YYYY-MM-DD')
+                value: this.state.tData[i].birthDate == null ? '' : moment(this.state.tData[i].birthDate, 'YYYY-MM-DD')
             },
             height: {
-                value: this.state.tData[index].height == null ? '' : this.state.tData[index].height
+                value: this.state.tData[i].height == null ? '' : this.state.tData[i].height
             },
             weight: {
-                value: this.state.tData[index].weight == null ? '' : this.state.tData[index].weight
+                value: this.state.tData[i].weight == null ? '' : this.state.tData[i].weight
             },
             roleNames: {
-                value: this.state.tData[index].roleNames == null ? '' : this.state.tData[index].roleNames.split(",")
+                value: this.state.tData[i].roleNames == null ? '' : this.state.tData[i].roleNames.split(",")
             },
             nation: {
-                value: this.state.tData[index].nation == null ? '' : this.state.tData[index].nation
+                value: this.state.tData[i].nation == null ? '' : this.state.tData[i].nation
             },
-            birthPlace: {
-                value: this.state.tData[index].birthPlace == null ? '' : this.state.tData[index].birthPlace
+            birthplace: {
+                value: this.state.tData[i].birthplace == null ? '' : this.state.tData[i].birthplace
             },
             idNumber: {
-                value: this.state.tData[index].idNumber == null ? '' : this.state.tData[index].idNumber
+                value: this.state.tData[i].idNumber == null ? '' : this.state.tData[i].idNumber
             },
             id: {
-                value: this.state.tData[index].id
+                value: this.state.tData[i].id
             }
         });
         this.setState({
@@ -487,8 +425,9 @@ export default class myTable extends React.Component{
         
         values.birthDate = values.birthDate.format();
         values.roleNames = values.roleNames.join(",");
+        values.teamId = document.teamId;
         console.log('Received values of form: ', values);
-        fetch("http://123.56.253.83/api/player", {
+        fetch("http://123.56.253.83/api/player/myplayer", {
             method: "POST",
             mode: "cors",
             //credentials: "include",
@@ -501,19 +440,20 @@ export default class myTable extends React.Component{
         .then((res) => {
             if(res.status != 200){
                 hashHistory.push('/login');
+            }else{
+                message.success("创建球员信息成功");
             }
-            message.success("创建球员信息成功");
             const dataSource = this.state.tData;
             const newData = {
                 key: this.state.tData.length + 1,
                 name: values.name,
                 number: values.number,
-                birthDate: values.birthDate,
+                birthDate: values.birthDate.split("T")[0],
                 height: values.height,
                 weight: values.weight,
                 roleNames: values.roleNames,
                 nation: values.nation,
-                birthPlace: values.birthPlace,
+                birthplace: values.birthplace,
                 idNumber: values.idNumber
             };
             this.setState({
@@ -545,10 +485,34 @@ export default class myTable extends React.Component{
         })
     }
 
-    onDelete = (index) => {
+    onDelete = (index, id) => {
         const dataSource = [...this.state.tData];
-        //fetch("http")
-        dataSource.splice(index, 1);
+        let i;
+        for(i = 0; i < this.state.tData.length; i++){
+            if(this.state.tData[i].id == id){
+                break;
+            }
+        }
+        fetch("http://123.56.253.83/api/player/myplayer/" + id, {
+            method: "DELETE",
+            mode: "cors",
+            //credentials: "include",
+            headers: {
+                'Content-Type': 'application/json;charset=utf-8',
+                'Authorization': 'bearer ' + document.cookie,
+            }
+        })
+        .then((res) => {
+            if(res.status != 200){
+                hashHistory.push('/login');
+            }else{
+                message.success("删除球员信息成功");
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+        dataSource.splice(i, 1);
         this.setState({tData: dataSource});
     }
 
@@ -587,7 +551,7 @@ export default class myTable extends React.Component{
             {
                 title: '出生地',
                 width: '10%',
-                dataIndex: 'birthPlace',
+                dataIndex: 'birthplace',
             },
             {
                 title: '身份证号码/其它证件',
@@ -606,7 +570,7 @@ export default class myTable extends React.Component{
                     return (
                         <span>
                             <a onClick={() => this.showEditForm(index, text)}>编缉  </a>
-                            <Popconfirm title="确定删除该球员信息?" onConfirm={() => this.onDelete(index)}>
+                            <Popconfirm title="确定删除该球员信息?" onConfirm={() => this.onDelete(index, text)}>
                                 <a href="#">删除</a>
                             </Popconfirm>
                         </span>

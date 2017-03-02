@@ -40,16 +40,30 @@ class Sider extends React.Component {
     }
 
     getUser = () => {
-        this.setState({
-            username: "daben",
-        });
+        fetch("http://123.56.253.83/api/user/current", {
+            method: "GET",
+            mode: "cors",
+            headers: {
+                'Authorization': 'bearer ' + document.cookie,
+            }
+        })
+        .then((res) => {
+            res.json().then((data) => {
+                this.setState({
+                    username: data.name,
+                });
+            })
+        })
+        .catch((error) => {
+            console.log(error);
+        })
     }
 
     render = () => {
         return (
             <div>
                 <div id="leftMenu">
-                    <img src="src/assets/images/logo.png" width="50" id="logo" />
+                    <img src="build/logo.png" width="50" id="logo" />
                     <Menu theme="dark"
                         onClick = {this.handleClick}
                         style={{width: "150px"}}
@@ -65,7 +79,7 @@ class Sider extends React.Component {
                 <div id="rightWrap">
                     <Menu mode="horizontal">
                         <SubMenu title={<span><Icon type="user" />{this.state.username}</span>}>
-                            <Menu.Item key="setting: 1">退出</Menu.Item>
+                            
                         </SubMenu>
                     </Menu>
                     <div className="right-box">
@@ -84,8 +98,8 @@ ReactDom.render(
                 <IndexRoute component={Login}/>
                 <Route path="login" component={Login} />
                 <Route path="index" component={Sider}>
-                    <Route path="myForm" component={myForm} />
-                    <Router path="myTable" component={myTable} />
+                    <Route path="myForm(/:id)" component={myForm} />
+                    <Router path="myTable(/:id)" component={myTable} />
                     <Route path="myChart" component={myChart} />
                     <Route path="myCalendar" component={myCalendar} />
                     <Route path="myCard" component={myCard} />
