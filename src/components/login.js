@@ -18,7 +18,6 @@ import 'whatwg-fetch';
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if(!err){
-                console.log('Received values of form: ', values);
                 //if(values.userName != 'admin' || values.password != "123456"){
                     //message.error('登录账号错误,请重新登录!');
                     //this.props.form.resetFields();

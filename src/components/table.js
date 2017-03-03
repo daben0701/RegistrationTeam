@@ -37,14 +37,14 @@ const CreateForm = Form.create()(
             {getFieldDecorator('name', {
               rules: [{ required: true, message: '请输入球员姓名!' }],
             })(
-              <Input placeholder="球员姓名"/>
+              <Input placeholder="球员姓名" maxLength = "40"/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="号码">
             {getFieldDecorator('number', {
               rules: [{ required: true, message: '请输入球员号码!' }],
             })(
-              <InputNumber placeholder="球员号码" style={{width: "100%"}}/>
+              <InputNumber placeholder="球员号码" min={0} max={100} style={{width: "100%"}}/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="出生日期">
@@ -58,35 +58,35 @@ const CreateForm = Form.create()(
             {getFieldDecorator('height', {
               rules: [{ required: true, message: '请输入球员身高!' }],
             })(
-              <InputNumber placeholder="球员身高" style={{width: "100%"}}/>
+              <InputNumber placeholder="球员身高" min={0} max={3} step={0.1} style={{width: "100%"}}/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="体重(kg)">
             {getFieldDecorator('weight', {
               rules: [{ required: true, message: '请输入球员体重!' }],
             })(
-              <InputNumber placeholder="球员体重" style={{width: "100%"}}/>
+              <InputNumber placeholder="球员体重" min={0} max={200} step={0.1} style={{width: "100%"}}/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="民族/国籍">
             {getFieldDecorator('nation', {
               rules: [{ required: true, message: '请输入球员民族/国籍!' }],
             })(
-              <Input placeholder="球员民族/国籍"/>
+              <Input placeholder="球员民族/国籍" maxLength = "40"/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="出生地">
             {getFieldDecorator('birthplace', {
               rules: [{ required: true, message: '请输入球员出生地!' }],
             })(
-              <Input placeholder="球员出生地"/>
+              <Input placeholder="球员出生地" maxLength = "40"/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="身份证/其它证件号码">
             {getFieldDecorator('idNumber', {
               rules: [{ required: true, message: '请输入球员身份证/其它证件号码!' }],
             })(
-              <Input placeholder="球员身份证/其它证件号码"/>
+              <Input placeholder="球员身份证/其它证件号码" maxLength = "40"/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="位置">
@@ -131,14 +131,14 @@ const EditInfoForm = Form.create()(
             {getFieldDecorator('name', {
               rules: [{ required: true, message: '请输入球员姓名!' }],
             })(
-              <Input placeholder="球员姓名"/>
+              <Input placeholder="球员姓名" maxLength = "40"/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="号码">
             {getFieldDecorator('number', {
               rules: [{ required: true, message: '请输入球员号码!' }],
             })(
-              <InputNumber placeholder="球员号码" style={{width: "100%"}}/>
+              <InputNumber placeholder="球员号码" min={0} max={100} style={{width: "100%"}}/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="出生日期">
@@ -152,35 +152,35 @@ const EditInfoForm = Form.create()(
             {getFieldDecorator('height', {
               rules: [{ required: true, message: '请输入球员身高!' }],
             })(
-              <InputNumber placeholder="球员身高" style={{width: "100%"}}/>
+              <InputNumber placeholder="球员身高" min={0} max={3} step={0.1} style={{width: "100%"}}/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="体重(kg)">
             {getFieldDecorator('weight', {
               rules: [{ required: true, message: '请输入球员体重!' }],
             })(
-              <InputNumber placeholder="球员体重" style={{width: "100%"}}/>
+              <InputNumber placeholder="球员体重" min={0} max={200} step={0.1} style={{width: "100%"}}/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="民族/国籍">
             {getFieldDecorator('nation', {
               rules: [{ required: true, message: '请输入球员民族/国籍!' }],
             })(
-              <Input placeholder="球员民族/国籍"/>
+              <Input placeholder="球员民族/国籍" maxLength = "40"/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="出生地">
             {getFieldDecorator('birthplace', {
               rules: [{ required: true, message: '请输入球员出生地!' }],
             })(
-              <Input placeholder="球员出生地"/>
+              <Input placeholder="球员出生地" maxLength = "40"/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="身份证/其它证件号码">
             {getFieldDecorator('idNumber', {
               rules: [{ required: true, message: '请输入球员身份证/其它证件号码!' }],
             })(
-              <Input placeholder="球员身份证/其它证件号码"/>
+              <Input placeholder="球员身份证/其它证件号码" maxLength = "40"/>
             )}
           </FormItem>
           <FormItem {...formItemLayout} label="位置">
@@ -236,7 +236,7 @@ export default class myTable extends React.Component{
     componentDidMount = () => {
         const players = [];
 
-        fetch("http://123.56.253.83/api/player", {
+        fetch("http://123.56.253.83/api/team/" + document.teamId + "/player", {
             method: "GET",
             mode: "cors",
             //credentials: "include",
@@ -312,7 +312,6 @@ export default class myTable extends React.Component{
         values.birthDate = values.birthDate.format();
         values.roleNames = values.roleNames.join(",");
         values.teamId = document.teamId;
-        console.log('Received values of form: ', values);
         fetch("http://123.56.253.83/api/player/myplayer", {
             method: "PUT",
             mode: "cors",
@@ -426,7 +425,6 @@ export default class myTable extends React.Component{
         values.birthDate = values.birthDate.format();
         values.roleNames = values.roleNames.join(",");
         values.teamId = document.teamId;
-        console.log('Received values of form: ', values);
         fetch("http://123.56.253.83/api/player/myplayer", {
             method: "POST",
             mode: "cors",

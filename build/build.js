@@ -34450,14 +34450,14 @@
 	                (0, _extends3.default)({}, formItemLayout, { label: '\u59D3\u540D' }),
 	                getFieldDecorator('name', {
 	                    rules: [{ required: true, message: '请输入球员姓名!' }]
-	                })(_react2.default.createElement(_input2.default, { placeholder: '\u7403\u5458\u59D3\u540D' }))
+	                })(_react2.default.createElement(_input2.default, { placeholder: '\u7403\u5458\u59D3\u540D', maxLength: '40' }))
 	            ),
 	            _react2.default.createElement(
 	                FormItem,
 	                (0, _extends3.default)({}, formItemLayout, { label: '\u53F7\u7801' }),
 	                getFieldDecorator('number', {
 	                    rules: [{ required: true, message: '请输入球员号码!' }]
-	                })(_react2.default.createElement(_inputNumber2.default, { placeholder: '\u7403\u5458\u53F7\u7801', style: { width: "100%" } }))
+	                })(_react2.default.createElement(_inputNumber2.default, { placeholder: '\u7403\u5458\u53F7\u7801', min: 0, max: 100, style: { width: "100%" } }))
 	            ),
 	            _react2.default.createElement(
 	                FormItem,
@@ -34471,35 +34471,35 @@
 	                (0, _extends3.default)({}, formItemLayout, { label: '\u8EAB\u9AD8(m)' }),
 	                getFieldDecorator('height', {
 	                    rules: [{ required: true, message: '请输入球员身高!' }]
-	                })(_react2.default.createElement(_inputNumber2.default, { placeholder: '\u7403\u5458\u8EAB\u9AD8', style: { width: "100%" } }))
+	                })(_react2.default.createElement(_inputNumber2.default, { placeholder: '\u7403\u5458\u8EAB\u9AD8', min: 0, max: 3, step: 0.1, style: { width: "100%" } }))
 	            ),
 	            _react2.default.createElement(
 	                FormItem,
 	                (0, _extends3.default)({}, formItemLayout, { label: '\u4F53\u91CD(kg)' }),
 	                getFieldDecorator('weight', {
 	                    rules: [{ required: true, message: '请输入球员体重!' }]
-	                })(_react2.default.createElement(_inputNumber2.default, { placeholder: '\u7403\u5458\u4F53\u91CD', style: { width: "100%" } }))
+	                })(_react2.default.createElement(_inputNumber2.default, { placeholder: '\u7403\u5458\u4F53\u91CD', min: 0, max: 200, step: 0.1, style: { width: "100%" } }))
 	            ),
 	            _react2.default.createElement(
 	                FormItem,
 	                (0, _extends3.default)({}, formItemLayout, { label: '\u6C11\u65CF/\u56FD\u7C4D' }),
 	                getFieldDecorator('nation', {
 	                    rules: [{ required: true, message: '请输入球员民族/国籍!' }]
-	                })(_react2.default.createElement(_input2.default, { placeholder: '\u7403\u5458\u6C11\u65CF/\u56FD\u7C4D' }))
+	                })(_react2.default.createElement(_input2.default, { placeholder: '\u7403\u5458\u6C11\u65CF/\u56FD\u7C4D', maxLength: '40' }))
 	            ),
 	            _react2.default.createElement(
 	                FormItem,
 	                (0, _extends3.default)({}, formItemLayout, { label: '\u51FA\u751F\u5730' }),
 	                getFieldDecorator('birthplace', {
 	                    rules: [{ required: true, message: '请输入球员出生地!' }]
-	                })(_react2.default.createElement(_input2.default, { placeholder: '\u7403\u5458\u51FA\u751F\u5730' }))
+	                })(_react2.default.createElement(_input2.default, { placeholder: '\u7403\u5458\u51FA\u751F\u5730', maxLength: '40' }))
 	            ),
 	            _react2.default.createElement(
 	                FormItem,
 	                (0, _extends3.default)({}, formItemLayout, { label: '\u8EAB\u4EFD\u8BC1/\u5176\u5B83\u8BC1\u4EF6\u53F7\u7801' }),
 	                getFieldDecorator('idNumber', {
 	                    rules: [{ required: true, message: '请输入球员身份证/其它证件号码!' }]
-	                })(_react2.default.createElement(_input2.default, { placeholder: '\u7403\u5458\u8EAB\u4EFD\u8BC1/\u5176\u5B83\u8BC1\u4EF6\u53F7\u7801' }))
+	                })(_react2.default.createElement(_input2.default, { placeholder: '\u7403\u5458\u8EAB\u4EFD\u8BC1/\u5176\u5B83\u8BC1\u4EF6\u53F7\u7801', maxLength: '40' }))
 	            ),
 	            _react2.default.createElement(
 	                FormItem,
@@ -34543,14 +34543,14 @@
 	                (0, _extends3.default)({}, formItemLayout, { label: '\u59D3\u540D' }),
 	                getFieldDecorator('name', {
 	                    rules: [{ required: true, message: '请输入球员姓名!' }]
-	                })(_react2.default.createElement(_input2.default, { placeholder: '\u7403\u5458\u59D3\u540D' }))
+	                })(_react2.default.createElement(_input2.default, { placeholder: '\u7403\u5458\u59D3\u540D', maxLength: '40' }))
 	            ),
 	            _react2.default.createElement(
 	                FormItem,
 	                (0, _extends3.default)({}, formItemLayout, { label: '\u53F7\u7801' }),
 	                getFieldDecorator('number', {
 	                    rules: [{ required: true, message: '请输入球员号码!' }]
-	                })(_react2.default.createElement(_inputNumber2.default, { placeholder: '\u7403\u5458\u53F7\u7801', style: { width: "100%" } }))
+	                })(_react2.default.createElement(_inputNumber2.default, { placeholder: '\u7403\u5458\u53F7\u7801', min: 0, max: 100, style: { width: "100%" } }))
 	            ),
 	            _react2.default.createElement(
 	                FormItem,
@@ -34564,35 +34564,35 @@
 	                (0, _extends3.default)({}, formItemLayout, { label: '\u8EAB\u9AD8(m)' }),
 	                getFieldDecorator('height', {
 	                    rules: [{ required: true, message: '请输入球员身高!' }]
-	                })(_react2.default.createElement(_inputNumber2.default, { placeholder: '\u7403\u5458\u8EAB\u9AD8', style: { width: "100%" } }))
+	                })(_react2.default.createElement(_inputNumber2.default, { placeholder: '\u7403\u5458\u8EAB\u9AD8', min: 0, max: 3, step: 0.1, style: { width: "100%" } }))
 	            ),
 	            _react2.default.createElement(
 	                FormItem,
 	                (0, _extends3.default)({}, formItemLayout, { label: '\u4F53\u91CD(kg)' }),
 	                getFieldDecorator('weight', {
 	                    rules: [{ required: true, message: '请输入球员体重!' }]
-	                })(_react2.default.createElement(_inputNumber2.default, { placeholder: '\u7403\u5458\u4F53\u91CD', style: { width: "100%" } }))
+	                })(_react2.default.createElement(_inputNumber2.default, { placeholder: '\u7403\u5458\u4F53\u91CD', min: 0, max: 200, step: 0.1, style: { width: "100%" } }))
 	            ),
 	            _react2.default.createElement(
 	                FormItem,
 	                (0, _extends3.default)({}, formItemLayout, { label: '\u6C11\u65CF/\u56FD\u7C4D' }),
 	                getFieldDecorator('nation', {
 	                    rules: [{ required: true, message: '请输入球员民族/国籍!' }]
-	                })(_react2.default.createElement(_input2.default, { placeholder: '\u7403\u5458\u6C11\u65CF/\u56FD\u7C4D' }))
+	                })(_react2.default.createElement(_input2.default, { placeholder: '\u7403\u5458\u6C11\u65CF/\u56FD\u7C4D', maxLength: '40' }))
 	            ),
 	            _react2.default.createElement(
 	                FormItem,
 	                (0, _extends3.default)({}, formItemLayout, { label: '\u51FA\u751F\u5730' }),
 	                getFieldDecorator('birthplace', {
 	                    rules: [{ required: true, message: '请输入球员出生地!' }]
-	                })(_react2.default.createElement(_input2.default, { placeholder: '\u7403\u5458\u51FA\u751F\u5730' }))
+	                })(_react2.default.createElement(_input2.default, { placeholder: '\u7403\u5458\u51FA\u751F\u5730', maxLength: '40' }))
 	            ),
 	            _react2.default.createElement(
 	                FormItem,
 	                (0, _extends3.default)({}, formItemLayout, { label: '\u8EAB\u4EFD\u8BC1/\u5176\u5B83\u8BC1\u4EF6\u53F7\u7801' }),
 	                getFieldDecorator('idNumber', {
 	                    rules: [{ required: true, message: '请输入球员身份证/其它证件号码!' }]
-	                })(_react2.default.createElement(_input2.default, { placeholder: '\u7403\u5458\u8EAB\u4EFD\u8BC1/\u5176\u5B83\u8BC1\u4EF6\u53F7\u7801' }))
+	                })(_react2.default.createElement(_input2.default, { placeholder: '\u7403\u5458\u8EAB\u4EFD\u8BC1/\u5176\u5B83\u8BC1\u4EF6\u53F7\u7801', maxLength: '40' }))
 	            ),
 	            _react2.default.createElement(
 	                FormItem,
@@ -34643,7 +34643,7 @@
 	        _this.componentDidMount = function () {
 	            var players = [];
 
-	            fetch("http://123.56.253.83/api/player", {
+	            fetch("http://123.56.253.83/api/team/" + document.teamId + "/player", {
 	                method: "GET",
 	                mode: "cors",
 	                //credentials: "include",
@@ -34706,7 +34706,6 @@
 	                values.birthDate = values.birthDate.format();
 	                values.roleNames = values.roleNames.join(",");
 	                values.teamId = document.teamId;
-	                console.log('Received values of form: ', values);
 	                fetch("http://123.56.253.83/api/player/myplayer", {
 	                    method: "PUT",
 	                    mode: "cors",
@@ -34806,7 +34805,6 @@
 	                values.birthDate = values.birthDate.format();
 	                values.roleNames = values.roleNames.join(",");
 	                values.teamId = document.teamId;
-	                console.log('Received values of form: ', values);
 	                fetch("http://123.56.253.83/api/player/myplayer", {
 	                    method: "POST",
 	                    mode: "cors",
@@ -80231,7 +80229,6 @@
 
 	        _this.handleSubmit = function (e) {
 	            e.preventDefault();
-	            console.log("收到表单值： ", (0, _stringify2.default)(_this.props.form.getFieldsValue()));
 	            var content = (0, _stringify2.default)(_this.props.form.getFieldsValue());
 	            fetch("http://123.56.253.83/api/team/mine", {
 	                method: "PUT",
@@ -80278,10 +80275,6 @@
 	                wrapperCol: { span: 10 }
 	            };
 
-	            var success = function success() {
-	                _message2.default.success('操作成功！');
-	            };
-
 	            return _react2.default.createElement(
 	                _form2.default,
 	                { horizontal: true, onSubmit: this.handleSubmit },
@@ -80291,7 +80284,7 @@
 	                        label: '\u4FF1\u4E50\u90E8\u7403\u961F\u5168\u79F0'
 	                    }, formItemLayout, {
 	                        required: true }),
-	                    _react2.default.createElement(_input2.default, (0, _extends3.default)({ placeholder: '\u8BF7\u8F93\u5165\u4FF1\u4E50\u90E8\u7403\u961F\u5168\u79F0' }, getFieldProps('fullName')))
+	                    _react2.default.createElement(_input2.default, (0, _extends3.default)({ placeholder: '\u8BF7\u8F93\u5165\u4FF1\u4E50\u90E8\u7403\u961F\u5168\u79F0', maxLength: '40' }, getFieldProps('fullName')))
 	                ),
 	                _react2.default.createElement(
 	                    FormItem,
@@ -80299,7 +80292,7 @@
 	                        label: '\u4FF1\u4E50\u90E8\u7403\u961F\u7B80\u79F0'
 	                    }, formItemLayout, {
 	                        required: true }),
-	                    _react2.default.createElement(_input2.default, (0, _extends3.default)({ placeholder: '\u8BF7\u8F93\u5165\u4FF1\u4E50\u90E8\u7403\u961F\u7B80\u79F0' }, getFieldProps('name')))
+	                    _react2.default.createElement(_input2.default, (0, _extends3.default)({ placeholder: '\u8BF7\u8F93\u5165\u4FF1\u4E50\u90E8\u7403\u961F\u7B80\u79F0', maxLength: '40' }, getFieldProps('name')))
 	                ),
 	                _react2.default.createElement(
 	                    FormItem,
@@ -80307,7 +80300,7 @@
 	                        label: '\u9886\u961F'
 	                    }, formItemLayout, {
 	                        required: true }),
-	                    _react2.default.createElement(_input2.default, (0, _extends3.default)({ placeholder: '\u8BF7\u8F93\u5165\u9886\u961F\u59D3\u540D' }, getFieldProps('leader')))
+	                    _react2.default.createElement(_input2.default, (0, _extends3.default)({ placeholder: '\u8BF7\u8F93\u5165\u9886\u961F\u59D3\u540D', maxLength: '40' }, getFieldProps('leader')))
 	                ),
 	                _react2.default.createElement(
 	                    FormItem,
@@ -80315,42 +80308,42 @@
 	                        label: '\u6559\u7EC3\u5458'
 	                    }, formItemLayout, {
 	                        required: true }),
-	                    _react2.default.createElement(_input2.default, (0, _extends3.default)({ placeholder: '\u8BF7\u8F93\u5165\u6559\u7EC3\u5458\u59D3\u540D' }, getFieldProps('coach')))
+	                    _react2.default.createElement(_input2.default, (0, _extends3.default)({ placeholder: '\u8BF7\u8F93\u5165\u6559\u7EC3\u5458\u59D3\u540D', maxLength: '40' }, getFieldProps('coach')))
 	                ),
 	                _react2.default.createElement(
 	                    FormItem,
 	                    (0, _extends3.default)({
 	                        label: '\u52A9\u7406\u6559\u7EC3'
 	                    }, formItemLayout),
-	                    _react2.default.createElement(_input2.default, (0, _extends3.default)({ placeholder: '\u8BF7\u8F93\u5165\u52A9\u7406\u6559\u7EC3\u59D3\u540D' }, getFieldProps('coachAssistant')))
+	                    _react2.default.createElement(_input2.default, (0, _extends3.default)({ placeholder: '\u8BF7\u8F93\u5165\u52A9\u7406\u6559\u7EC3\u59D3\u540D', maxLength: '40' }, getFieldProps('coachAssistant')))
 	                ),
 	                _react2.default.createElement(
 	                    FormItem,
 	                    (0, _extends3.default)({
 	                        label: '\u961F\u533B'
 	                    }, formItemLayout),
-	                    _react2.default.createElement(_input2.default, (0, _extends3.default)({ placeholder: '\u8BF7\u8F93\u5165\u961F\u533B\u59D3\u540D' }, getFieldProps('doctor')))
+	                    _react2.default.createElement(_input2.default, (0, _extends3.default)({ placeholder: '\u8BF7\u8F93\u5165\u961F\u533B\u59D3\u540D', maxLength: '40' }, getFieldProps('doctor')))
 	                ),
 	                _react2.default.createElement(
 	                    FormItem,
 	                    (0, _extends3.default)({
 	                        label: '\u7FFB\u8BD1'
 	                    }, formItemLayout),
-	                    _react2.default.createElement(_input2.default, (0, _extends3.default)({ placeholder: '\u8BF7\u8F93\u5165\u52A9\u7406\u7FFB\u8BD1\u59D3\u540D' }, getFieldProps('translater')))
+	                    _react2.default.createElement(_input2.default, (0, _extends3.default)({ placeholder: '\u8BF7\u8F93\u5165\u52A9\u7406\u7FFB\u8BD1\u59D3\u540D', maxLength: '40' }, getFieldProps('translater')))
 	                ),
 	                _react2.default.createElement(
 	                    FormItem,
 	                    (0, _extends3.default)({
 	                        label: '\u4E3B\u573A\u7403\u8863\u989C\u8272'
 	                    }, formItemLayout),
-	                    _react2.default.createElement(_input2.default, (0, _extends3.default)({ placeholder: '\u8BF7\u8F93\u5165\u4E3B\u573A\u7403\u8863\u989C\u8272' }, getFieldProps('homeTeamShirtColor')))
+	                    _react2.default.createElement(_input2.default, (0, _extends3.default)({ placeholder: '\u8BF7\u8F93\u5165\u4E3B\u573A\u7403\u8863\u989C\u8272', maxLength: '10' }, getFieldProps('homeTeamShirtColor')))
 	                ),
 	                _react2.default.createElement(
 	                    FormItem,
 	                    (0, _extends3.default)({
 	                        label: '\u5BA2\u573A\u7403\u8863\u989C\u8272'
 	                    }, formItemLayout),
-	                    _react2.default.createElement(_input2.default, (0, _extends3.default)({ placeholder: '\u8BF7\u8F93\u5165\u5BA2\u573A\u7403\u8863\u989C\u8272' }, getFieldProps('awayTeamShirtColor')))
+	                    _react2.default.createElement(_input2.default, (0, _extends3.default)({ placeholder: '\u8BF7\u8F93\u5165\u5BA2\u573A\u7403\u8863\u989C\u8272', maxLength: '10' }, getFieldProps('awayTeamShirtColor')))
 	                ),
 	                _react2.default.createElement(
 	                    FormItem,
@@ -82601,7 +82594,6 @@
 	            e.preventDefault();
 	            _this.props.form.validateFields(function (err, values) {
 	                if (!err) {
-	                    console.log('Received values of form: ', values);
 	                    //if(values.userName != 'admin' || values.password != "123456"){
 	                    //message.error('登录账号错误,请重新登录!');
 	                    //this.props.form.resetFields();

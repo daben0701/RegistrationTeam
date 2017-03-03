@@ -69,7 +69,6 @@ class myForm extends React.Component{
 
     handleSubmit = (e) => {
         e.preventDefault();
-        console.log("收到表单值： ", JSON.stringify(this.props.form.getFieldsValue()));
         let content = JSON.stringify(this.props.form.getFieldsValue());
         fetch("http://123.56.253.83/api/team/mine", {
             method: "PUT",
@@ -106,68 +105,64 @@ class myForm extends React.Component{
             wrapperCol: {span: 10},
         };
 
-        const success = function(){
-            message.success('操作成功！');
-        };
-
         return (
             <Form horizontal onSubmit = {this.handleSubmit}>
                 <FormItem
                     label="俱乐部球队全称"
                     {...formItemLayout}
                     required>
-                    <Input placeholder = "请输入俱乐部球队全称" {...getFieldProps('fullName')}/>
+                    <Input placeholder = "请输入俱乐部球队全称" maxLength = "40" {...getFieldProps('fullName')}/>
                 </FormItem>
 
                 <FormItem
                     label="俱乐部球队简称"
                     {...formItemLayout}
                     required>
-                    <Input placeholder = "请输入俱乐部球队简称" {...getFieldProps('name')}/>
+                    <Input placeholder = "请输入俱乐部球队简称" maxLength = "40" {...getFieldProps('name')}/>
                 </FormItem>
 
                 <FormItem
                     label="领队"
                     {...formItemLayout}
                     required>
-                    <Input placeholder = "请输入领队姓名" {...getFieldProps('leader')}/>
+                    <Input placeholder = "请输入领队姓名" maxLength = "40" {...getFieldProps('leader')}/>
                 </FormItem>
 
                 <FormItem
                     label="教练员"
                     {...formItemLayout}
                     required>
-                    <Input placeholder = "请输入教练员姓名" {...getFieldProps('coach')}/>
+                    <Input placeholder = "请输入教练员姓名" maxLength = "40" {...getFieldProps('coach')}/>
                 </FormItem>
 
                 <FormItem
                     label="助理教练"
                     {...formItemLayout}>
-                    <Input placeholder = "请输入助理教练姓名" {...getFieldProps('coachAssistant')}/>
+                    <Input placeholder = "请输入助理教练姓名" maxLength = "40" {...getFieldProps('coachAssistant')}/>
                 </FormItem>
 
                 <FormItem
                     label="队医"
                     {...formItemLayout}>
-                    <Input placeholder = "请输入队医姓名" {...getFieldProps('doctor')}/>
+                    <Input placeholder = "请输入队医姓名" maxLength = "40" {...getFieldProps('doctor')}/>
                 </FormItem>
 
                 <FormItem
                     label="翻译"
                     {...formItemLayout}>
-                    <Input placeholder = "请输入助理翻译姓名" {...getFieldProps('translater')}/>
+                    <Input placeholder = "请输入助理翻译姓名" maxLength = "40" {...getFieldProps('translater')}/>
                 </FormItem>
 
                 <FormItem
                     label="主场球衣颜色"
                     {...formItemLayout}>
-                    <Input placeholder = "请输入主场球衣颜色" {...getFieldProps('homeTeamShirtColor')}/>
+                    <Input placeholder = "请输入主场球衣颜色" maxLength = "10" {...getFieldProps('homeTeamShirtColor')}/>
                 </FormItem>
 
                 <FormItem
                     label="客场球衣颜色"
                     {...formItemLayout}>
-                    <Input placeholder = "请输入客场球衣颜色" {...getFieldProps('awayTeamShirtColor')}/>
+                    <Input placeholder = "请输入客场球衣颜色" maxLength = "10" {...getFieldProps('awayTeamShirtColor')}/>
                 </FormItem>
 
                 <FormItem
