@@ -147,7 +147,7 @@
 	                method: "GET",
 	                mode: "cors",
 	                headers: {
-	                    'Authorization': 'bearer ' + document.cookie
+	                    'Authorization': 'bearer ' + window.localStorage.token
 	                }
 	            }).then(function (res) {
 	                res.json().then(function (data) {
@@ -34625,7 +34625,7 @@
 	                method: "GET",
 	                mode: "cors",
 	                headers: {
-	                    'Authorization': 'bearer ' + document.cookie
+	                    'Authorization': 'bearer ' + window.localStorage.token
 	                }
 	                //credentials: "include",
 	            }).then(function (res) {
@@ -34648,7 +34648,7 @@
 	                mode: "cors",
 	                //credentials: "include",
 	                headers: {
-	                    'Authorization': 'bearer ' + document.cookie
+	                    'Authorization': 'bearer ' + window.localStorage.token
 	                }
 	            }).then(function (res) {
 	                if (res.status !== 200) {
@@ -34713,7 +34713,7 @@
 	                    //credentials: "include",
 	                    headers: {
 	                        'Content-Type': 'application/json;charset=utf-8',
-	                        'Authorization': 'bearer ' + document.cookie
+	                        'Authorization': 'bearer ' + window.localStorage.token
 	                    },
 	                    body: (0, _stringify2.default)(values)
 	                }).then(function (res) {
@@ -34813,7 +34813,7 @@
 	                    //credentials: "include",
 	                    headers: {
 	                        'Content-Type': 'application/json;charset=utf-8',
-	                        'Authorization': 'bearer ' + document.cookie
+	                        'Authorization': 'bearer ' + window.localStorage.token
 	                    },
 	                    body: (0, _stringify2.default)(values)
 	                }).then(function (res) {
@@ -34877,7 +34877,7 @@
 	                //credentials: "include",
 	                headers: {
 	                    'Content-Type': 'application/json;charset=utf-8',
-	                    'Authorization': 'bearer ' + document.cookie
+	                    'Authorization': 'bearer ' + window.localStorage.token
 	                }
 	            }).then(function (res) {
 	                if (res.status != 200) {
@@ -80208,7 +80208,7 @@
 	                method: "GET",
 	                mode: "cors",
 	                headers: {
-	                    'Authorization': 'bearer ' + document.cookie
+	                    'Authorization': 'bearer ' + window.localStorage.token
 	                }
 	                //credentials: "include",
 	            }).then(function (res) {
@@ -80239,7 +80239,7 @@
 	                //credentials: "include",
 	                headers: {
 	                    'Content-Type': 'application/json;charset=utf-8',
-	                    'Authorization': 'bearer ' + document.cookie
+	                    'Authorization': 'bearer ' + window.localStorage.token
 	                },
 	                body: content
 	            }).then(function (res) {
@@ -82627,7 +82627,7 @@
 	                    }).then(function (res) {
 	                        if (res.status >= 200 && res.status < 300) {
 	                            res.json().then(function (data) {
-	                                document.cookie = data.result;
+	                                window.localStorage.token = data.result;
 	                                _reactRouter.hashHistory.push('/index/myform');
 	                            });
 	                        } else {

@@ -44,7 +44,7 @@ class Sider extends React.Component {
             method: "GET",
             mode: "cors",
             headers: {
-                'Authorization': 'bearer ' + document.cookie,
+                'Authorization': 'bearer ' + window.localStorage.token,
             }
         })
         .then((res) => {

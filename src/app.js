@@ -17,8 +17,7 @@ console.log(path.join(__dirname, "../build"));
 app.use('/build', express.static(path.join(__dirname, "../build")));
 
 var server = app.listen(8000, function(){
-    //var host = server.address().address;
-    var host = "127.0.0.1";
+    var host = server.address().address;
     var port = server.address().port;
     console.log('Listening at http://%s:%s', host, port);
 }); 

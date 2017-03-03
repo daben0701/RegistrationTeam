@@ -46,7 +46,7 @@ class myForm extends React.Component{
             method: "GET",
             mode: "cors",
             headers: {
-                'Authorization': 'bearer ' + document.cookie,
+                'Authorization': 'bearer ' + window.localStorage.token,
             }
             //credentials: "include",
         })
@@ -77,7 +77,7 @@ class myForm extends React.Component{
             //credentials: "include",
             headers: {
                 'Content-Type': 'application/json;charset=utf-8',
-                'Authorization': 'bearer ' + document.cookie,
+                'Authorization': 'bearer ' + window.localStorage.token,
             },
             body: content
         }).then((res) => {

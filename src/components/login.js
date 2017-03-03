@@ -49,7 +49,7 @@ import 'whatwg-fetch';
                     .then((res) => {
                         if(res.status >= 200 && res.status < 300){
                             res.json().then((data) => {
-                                document.cookie = data.result;
+                                window.localStorage.token = data.result;
                                 hashHistory.push('/index/myform');  
                             })
                         }else{

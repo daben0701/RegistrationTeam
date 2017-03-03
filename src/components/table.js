@@ -218,7 +218,7 @@ export default class myTable extends React.Component{
             method: "GET",
             mode: "cors",
             headers: {
-                'Authorization': 'bearer ' + document.cookie,
+                'Authorization': 'bearer ' + window.localStorage.token,
             }
             //credentials: "include",
         })
@@ -241,7 +241,7 @@ export default class myTable extends React.Component{
             mode: "cors",
             //credentials: "include",
             headers: {
-                'Authorization': 'bearer ' + document.cookie,
+                'Authorization': 'bearer ' + window.localStorage.token,
             }
         })
         .then((res) => {
@@ -319,7 +319,7 @@ export default class myTable extends React.Component{
             //credentials: "include",
             headers: {
                 'Content-Type': 'application/json;charset=utf-8',
-                'Authorization': 'bearer ' + document.cookie,
+                'Authorization': 'bearer ' + window.localStorage.token,
             },
             body: JSON.stringify(values)
         })
@@ -433,7 +433,7 @@ export default class myTable extends React.Component{
             //credentials: "include",
             headers: {
                 'Content-Type': 'application/json;charset=utf-8',
-                'Authorization': 'bearer ' + document.cookie,
+                'Authorization': 'bearer ' + window.localStorage.token,
             },
             body: JSON.stringify(values)
         })
@@ -499,7 +499,7 @@ export default class myTable extends React.Component{
             //credentials: "include",
             headers: {
                 'Content-Type': 'application/json;charset=utf-8',
-                'Authorization': 'bearer ' + document.cookie,
+                'Authorization': 'bearer ' + window.localStorage.token,
             }
         })
         .then((res) => {
