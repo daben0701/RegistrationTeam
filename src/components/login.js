@@ -66,32 +66,34 @@ import 'whatwg-fetch';
         const { getFieldDecorator  } = this.props.form;
 
         return(
-            <div style={{width: "100%", height: "100%"}}>
+            <div style={{width: "100%", height: "100%", backgroundImage: "url(/src/pic/login-background.jpg)"}}>
                 <div style={{position: "absolute", left: 10, top: 10}}>
                     <span style={{fontSize: 40, lineHeight: 3, marginLeft: 20, color: "#108ee9"}}>篮球联赛报名系统</span>
                 </div>
                 <div style={{width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center"}}>
-                    <Form onSubmit={this.submitLogin} className="login-form" style={{maxWidth: 400}}>
-                        <FormItem>
-                            {getFieldDecorator('userName', {
-                                rules:[{required: true, message: "请输入用户名！"}],
-                            })(
-                                <Input addonBefore={<Icon type="user" />} placeholder="用户名" />
-                            )}
-                        </FormItem>
-                        <FormItem>
-                            {getFieldDecorator('password', {
-                                rules:[{required: true, message: "请输入密码！"}]
-                            })(
-                                <Input addonBefore={<Icon type="lock" />} type="password" placeholder="密码" />
-                            )}
-                        </FormItem>
-                        <FormItem style={{width: 400}}>
-                            
-                            <a className="login-form-forget" style={{float: "right"}}>忘记密码</a>
-                            <Button type="primary" htmlType="submit" className="login-form-button" style={{width: "100%"}}>登录</Button>
-                        </FormItem>
-                    </Form>
+                    
+                    <div style={{border: "1px solid #cfdbe2", borderRadius: 8, padding: "40px 40px 20px 40px", background: "#fafafa", backgroundColor: "rgba(255, 255, 255, 0.5)"}}>
+                        <Form onSubmit={this.submitLogin} className="login-form" style={{maxWidth: 400}}>
+                            <div style={{textAlign: 'center', fontSize: 20, marginBottom: 20}}>用户登陆</div>
+                            <FormItem>
+                                {getFieldDecorator('userName', {
+                                    rules:[{required: true, message: "请输入用户名！"}],
+                                })(
+                                    <Input addonBefore={<Icon type="user" />} placeholder="用户名" />
+                                )}
+                            </FormItem>
+                            <FormItem>
+                                {getFieldDecorator('password', {
+                                    rules:[{required: true, message: "请输入密码！"}]
+                                })(
+                                    <Input addonBefore={<Icon type="lock" />} type="password" placeholder="密码" />
+                                )}
+                            </FormItem>
+                            <FormItem style={{width: 400}}>
+                                <Button type="primary" htmlType="submit" className="login-form-button" style={{width: "100%"}}>登录</Button>
+                            </FormItem>
+                        </Form>
+                    </div>
                 </div>
             </div>
         );

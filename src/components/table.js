@@ -213,30 +213,10 @@ export default class myTable extends React.Component{
         };
     }
 
-    componentWillMount = () => {
-        fetch("http://123.56.253.83/api/Team/mine", {
-            method: "GET",
-            mode: "cors",
-            headers: {
-                'Authorization': 'bearer ' + window.localStorage.token,
-            }
-            //credentials: "include",
-        })
-            .then((res) => {
-                if(res.status !== 200){
-                    hashHistory.push('/login');
-                }
-                res.json().then((data) => {
-                    document.teamId = data.id;
-                })
-            })
-            .catch((error) => {alert("error")})
-    }
-
     componentDidMount = () => {
         const players = [];
 
-        fetch("http://123.56.253.83/api/team/" + document.teamId + "/player", {
+        fetch("http://123.56.253.83/api/team/" + window.localStorage.teamId + "/player", {
             method: "GET",
             mode: "cors",
             //credentials: "include",
@@ -311,7 +291,7 @@ export default class myTable extends React.Component{
         
         values.birthDate = values.birthDate.format();
         values.roleNames = values.roleNames.join(",");
-        values.teamId = document.teamId;
+        values.teamId = window.localStorage.teamId;
         fetch("http://123.56.253.83/api/player/myplayer", {
             method: "PUT",
             mode: "cors",
@@ -424,7 +404,7 @@ export default class myTable extends React.Component{
         
         values.birthDate = values.birthDate.format();
         values.roleNames = values.roleNames.join(",");
-        values.teamId = document.teamId;
+        values.teamId = window.localStorage.teamId;
         fetch("http://123.56.253.83/api/player/myplayer", {
             method: "POST",
             mode: "cors",

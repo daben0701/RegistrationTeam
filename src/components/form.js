@@ -57,7 +57,7 @@ class myForm extends React.Component{
                 res.json().then((data) => {
                     //console.log(data);
                     this.setFormValue(data);
-                    document.teamId = data.id;
+                    window.localStorage.teamId = data.id;
                 })
             })
             .catch((error) => {alert("error")})
