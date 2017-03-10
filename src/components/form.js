@@ -69,24 +69,29 @@ class myForm extends React.Component{
 
     handleSubmit = (e) => {
         e.preventDefault();
-        let content = JSON.stringify(this.props.form.getFieldsValue());
-        fetch("http://123.56.253.83/api/team/mine", {
-            method: "PUT",
-            mode: "cors",
-            //credentials: "include",
-            headers: {
-                'Content-Type': 'application/json;charset=utf-8',
-                'Authorization': 'bearer ' + window.localStorage.token,
-            },
-            body: content
-        }).then((res) => {
-            if(res.status >= 200 && res.status < 300){
-                message.success("球队信息更新成功！");
-            }else{
-                hashHistory.push('/login');
+        form.validateFields((err, values) => {
+            if (err) {
+            return;
             }
-        })
-        .catch((error) => {alert(error);});
+            let content = JSON.stringify(this.props.form.getFieldsValue());
+            fetch("http://123.56.253.83/api/team/mine", {
+                method: "PUT",
+                mode: "cors",
+                //credentials: "include",
+                headers: {
+                    'Content-Type': 'application/json;charset=utf-8',
+                    'Authorization': 'bearer ' + window.localStorage.token,
+                },
+                body: content
+            }).then((res) => {
+                if(res.status >= 200 && res.status < 300){
+                    message.success("球队信息更新成功！");
+                }else{
+                    hashHistory.push('/login');
+                }
+            })
+            .catch((error) => {alert(error);});
+        });
     }
 
     resetModal = () => {

@@ -13,9 +13,6 @@ import 'font-awesome/css/font-awesome.min.css'
 import './main.css'
 import myTable from './components/table.js'
 import myForm from './components/form.js'
-import myChart from './components/chart.js'
-import myCalendar from './components/calendar.js'
-import myCard from './components/fetch.js'
 import Login from './components/login.js'
 
 const ACTIVE = { color: 'red' }
@@ -100,9 +97,6 @@ ReactDom.render(
                 <Route path="index" component={Sider}>
                     <Route path="myForm(/:id)" component={myForm} />
                     <Router path="myTable(/:id)" component={myTable} />
-                    <Route path="myChart" component={myChart} />
-                    <Route path="myCalendar" component={myCalendar} />
-                    <Route path="myCard" component={myCard} />
                 </Route>
             </Route>
         </Router>

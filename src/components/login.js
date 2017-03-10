@@ -5,8 +5,6 @@ const FormItem = Form.Item;
 
 import { Link, hashHistory} from 'react-router';
 
-import styles from './login.css';
-
 import 'whatwg-fetch';
 
  class Login extends Component {
