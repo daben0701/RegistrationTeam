@@ -208,7 +208,6 @@ export default class myTable extends React.Component{
         super(props);
         this.state = {
             tData: [],
-            selectedRowKeys: [],
             createVisible: false,
         };
     }
@@ -251,35 +250,16 @@ export default class myTable extends React.Component{
         })
         this.setState({
             tData: players,
-            visible: false,
             editFormVisible: false,
             createVisible: false,
             index: 0,
         });
     }
 
-    onSelectChange = (selectedRowKeys) => {
-        console.log('selectedRowKeys changed:', selectedRowKeys);
-        this.setState({selectedRowKeys});
-    }
-
     showModal = () => {
         this.setState({
             createVisible: true
         });
-    }
-
-    handleOk() {
-        this.setState({ loading1: true });
-        setTimeout(() => {
-            this.setState({ loading1: false, visible: false });
-            console.log('ok');
-            openNotification();
-        }, 2000);
-    }
-
-    handleCancel() {
-        this.setState({ visible: false });
     }
 
     handleEdit= () => {
@@ -334,14 +314,6 @@ export default class myTable extends React.Component{
       });
   }
 
-    confirm() {
-        message.success('点击了确定');
-    }
-
-    cancel() {
-        message.error('点击了取消');
-    }
-
     saveFormRef = (form) => {
         this.form = form;
     }
@@ -389,10 +361,6 @@ export default class myTable extends React.Component{
             editFormVisible: true,
             index: index,
         });
-    }
-
-    handleCancel() {
-        this.setState({ visible: false });
     }
 
     handleCreate = () => {
@@ -557,13 +525,6 @@ export default class myTable extends React.Component{
                 width: '10%'
             }
         ];
-
-        const {selectedRowKeys} = this.state;
-
-        const rowSelection = {
-            selectedRowKeys,
-            onChange: this.onSelectChange,
-        };
 
         const pagination = {
             total: this.state.tData.length,
