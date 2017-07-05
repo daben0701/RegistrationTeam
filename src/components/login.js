@@ -26,7 +26,7 @@ import 'whatwg-fetch';
                 formData.append("mobile", values.userName);
                 formData.append("password", values.password);
 
-                fetch("http://123.56.253.83/api/account/login", {
+                fetch("http://101.200.130.39/api/account/login", {
                     method: "POST",
                     mode: "cors",
                     //credentials: "include",
@@ -35,7 +35,7 @@ import 'whatwg-fetch';
                         'Content-Type': 'application/json;charset=utf-8',
                         //'Access-Control-Allow-Credentials': 'true',
                         //'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, OPTIONS',
-                        //'Access-Control-Allow-Origin': 'http://123.56.253.83'
+                        //'Access-Control-Allow-Origin': 'http://101.200.130.39'
                     },
                     body: 
                     JSON.stringify({

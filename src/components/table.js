@@ -215,7 +215,7 @@ export default class myTable extends React.Component{
     componentDidMount = () => {
         const players = [];
 
-        fetch("http://123.56.253.83/api/team/" + window.localStorage.teamId + "/player", {
+        fetch("http://101.200.130.39/api/team/" + window.localStorage.teamId + "/player", {
             method: "GET",
             mode: "cors",
             //credentials: "include",
@@ -272,7 +272,7 @@ export default class myTable extends React.Component{
         values.birthDate = values.birthDate.format();
         values.roleNames = values.roleNames.join(",");
         values.teamId = window.localStorage.teamId;
-        fetch("http://123.56.253.83/api/player/myplayer", {
+        fetch("http://101.200.130.39/api/player/myplayer", {
             method: "PUT",
             mode: "cors",
             //credentials: "include",
@@ -373,7 +373,7 @@ export default class myTable extends React.Component{
         values.birthDate = values.birthDate.format();
         values.roleNames = values.roleNames.join(",");
         values.teamId = window.localStorage.teamId;
-        fetch("http://123.56.253.83/api/player/myplayer", {
+        fetch("http://101.200.130.39/api/player/myplayer", {
             method: "POST",
             mode: "cors",
             //credentials: "include",
@@ -439,7 +439,7 @@ export default class myTable extends React.Component{
                 break;
             }
         }
-        fetch("http://123.56.253.83/api/player/myplayer/" + id, {
+        fetch("http://101.200.130.39/api/player/myplayer/" + id, {
             method: "DELETE",
             mode: "cors",
             //credentials: "include",

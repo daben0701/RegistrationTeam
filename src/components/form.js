@@ -42,7 +42,7 @@ class myForm extends React.Component{
     }
 
     componentWillMount = () => {
-        fetch("http://123.56.253.83/api/Team/mine", {
+        fetch("http://101.200.130.39/api/Team/mine", {
             method: "GET",
             mode: "cors",
             headers: {
@@ -74,7 +74,7 @@ class myForm extends React.Component{
             return;
             }
             let content = JSON.stringify(this.props.form.getFieldsValue());
-            fetch("http://123.56.253.83/api/team/mine", {
+            fetch("http://101.200.130.39/api/team/mine", {
                 method: "PUT",
                 mode: "cors",
                 //credentials: "include",

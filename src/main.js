@@ -37,7 +37,7 @@ class Sider extends React.Component {
     }
 
     getUser = () => {
-        fetch("http://123.56.253.83/api/user/current", {
+        fetch("http://101.200.130.39/api/user/current", {
             method: "GET",
             mode: "cors",
             headers: {
