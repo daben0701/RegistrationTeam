@@ -46,8 +46,24 @@ import 'whatwg-fetch';
                     .then((res) => {
                         if(res.status >= 200 && res.status < 300){
                             res.json().then((data) => {
-                                window.localStorage.token = data.result;
-                                hashHistory.push('/index/myform');  
+                                fetch("http://101.200.130.39/api/Team/mine", {
+                                    method: "GET",
+                                    mode: "cors",
+                                    headers: {
+                                        'Authorization': 'bearer ' + data.result,
+                                    }
+                                    //credentials: "include",
+                                })
+                                    .then((res) => {
+                                        if (res.status !== 200) {
+                                            message.error('请先在篮球慧馆APP上报名!');
+                                        }else{
+                                            window.localStorage.token = data.result;
+                                            hashHistory.push('/index/myform'); 
+                                        }
+                                    })
+                                    .catch((error) => { alert("error") })
+                                 
                             })
                         }else{
                             message.error('账号或密码错误,请重新登录!')
